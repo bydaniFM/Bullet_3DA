@@ -1,0 +1,1 @@
+//Es igual que un rigidbody, pero especializado para las colisiones
