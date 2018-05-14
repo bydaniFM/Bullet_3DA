@@ -4,39 +4,39 @@
 
 namespace bullet_3da
 {
-	Physics_World::Physics_World()
-	{
-		// Collision configuration contains default setup for memory, collision setup.
-		// Advanced users can create their own configuration.
+	//Physics_World::Physics_World()
+	//{
+	//	// Collision configuration contains default setup for memory, collision setup.
+	//	// Advanced users can create their own configuration.
 
-		btDefaultCollisionConfiguration collisionConfiguration;
+	//	btDefaultCollisionConfiguration collisionConfiguration;
 
-		// Use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded).
+	//	// Use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded).
 
-		btCollisionDispatcher collisionDispatcher(&collisionConfiguration);
+	//	btCollisionDispatcher collisionDispatcher(&collisionConfiguration);
 
-		// btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
+	//	// btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
 
-		btDbvtBroadphase overlappingPairCache;
+	//	btDbvtBroadphase overlappingPairCache;
 
-		// The default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded).
+	//	// The default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded).
 
-		btSequentialImpulseConstraintSolver constraintSolver;
+	//	btSequentialImpulseConstraintSolver constraintSolver;
 
-		// Create and configure the physiscs world:
+	//	// Create and configure the physiscs world:
 
-		this->world = make_shared<btDiscreteDynamicsWorld>
-		(
-			new btDiscreteDynamicsWorld
-			(
-				&collisionDispatcher,
-				&overlappingPairCache,
-				&constraintSolver,
-				&collisionConfiguration
-			)
+	//	this->dynamicsWorld = make_shared<btDiscreteDynamicsWorld>
+	//	(
+	//		new btDiscreteDynamicsWorld
+	//		(
+	//			&collisionDispatcher,
+	//			&overlappingPairCache,
+	//			&constraintSolver,
+	//			&collisionConfiguration
+	//		)
 
-		);
+	//	);
 
-		world->setGravity(btVector3(0, -10, 0));
-	}
+	//	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+	//}
 }

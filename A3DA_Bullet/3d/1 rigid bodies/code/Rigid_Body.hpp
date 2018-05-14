@@ -26,6 +26,9 @@ namespace bullet_3da
 
 	public:
 
+		///DEPRECATED
+		Rigid_Body();
+
 		Rigid_Body(std::shared_ptr< Shape > & shape) : shape(shape)
 		{
 			btTransform transform;

@@ -20,11 +20,14 @@ namespace bullet_3da
 		graphics_scene->add("sphere", model);
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
+
+		light->translate(Vector3(10.f, 10.f, 10.f));
+		camera->translate(Vector3(0.f, 0.f, 5.f));
 	}
 
-	void Scene::configure_scene()
+	/*void Scene::configure_scene()
 	{
 		graphics_scene.get["light"]->translate(Vector3(10.f, 10.f, 10.f));
 		graphics_scene.get["camera"]->translate(Vector3(0.f, 0.f, 5.f));
-	}
+	}*/
 }

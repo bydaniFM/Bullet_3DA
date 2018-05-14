@@ -36,11 +36,11 @@ namespace bullet_3da
 		Scene();
 		~Scene();
 
-		void configure_scene();
+		//void configure_scene();
 
-		void update()
+		void update(float deltaTime)
 		{
-			physics_world->step();
+			physics_world->step(deltaTime);
 			//Actualizar todas las entidades
 		}
 
@@ -48,6 +48,8 @@ namespace bullet_3da
 		{
 			//llama al render de graphics scene
 		}
+
+		//Hacer getter
 
 	};
 }
