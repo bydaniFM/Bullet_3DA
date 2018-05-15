@@ -20,16 +20,27 @@ namespace bullet_3da
 	{
 		Scene & scene;
 
+	protected:
+
 		glt::Model graphics_model;
-		Rigid_Body physics_model;
+		shared_ptr < Rigid_Body > physics_model;
 
 	public:
-		Entity(Scene * scene);
+		Entity(Scene * scene)
+			:
+			scene(*scene)
+		{
+		}
 		~Entity();
 
 		void update()
 		{
 			//Copiar el transform de física a gráficos
+		}
+
+		shared_ptr < Rigid_Body > getRigidBody()
+		{
+			return physics_model;
 		}
 
 	};

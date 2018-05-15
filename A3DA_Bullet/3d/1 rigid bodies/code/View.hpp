@@ -13,6 +13,8 @@ Date:	04/05/2018
 
 #include <SFML/Window.hpp>
 
+#include <Scene.hpp>
+
 using namespace std;
 using namespace sf;
 
@@ -26,6 +28,14 @@ namespace bullet_3da
 	public:
 
 		View();
+
+		void reset_viewport(Scene & scene);
+
+		shared_ptr<Window> getWindow()
+		{
+			return window;
+		}
+
 	};
 
 }

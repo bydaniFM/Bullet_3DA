@@ -27,4 +27,14 @@ namespace bullet_3da
 		this->window->setVerticalSyncEnabled(true);
 	}
 
+	void View::reset_viewport(Scene & scene)
+	{
+		GLsizei width = GLsizei(window->getSize().x);
+		GLsizei height = GLsizei(window->getSize().y);
+
+		scene.get_graphics_scene()->get_active_camera()->set_aspect_ratio(float(width) / height);
+
+		glViewport(0, 0, width, height);
+	}
+
 }

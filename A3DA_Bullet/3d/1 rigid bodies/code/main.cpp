@@ -29,47 +29,50 @@
 #include <SFML/Window.hpp>
 #include <btBulletDynamicsCommon.h>
 
+#include <View.hpp>
+#include <Scene.hpp>
+
 using namespace std;
 using namespace glt;
 
-namespace bullet_3da
-{
-
-    shared_ptr< Render_Node > create_scene ()
-    {
-        // Se crean los elementos (nodos) y la escena a la que se añadirán:
-
-        shared_ptr< Render_Node > scene (new Render_Node);
-        shared_ptr< Model       > model (new Model_Obj("../../../../assets/sphere.obj"));
-        shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 50.f, 1.f));
-        shared_ptr< Light       > light (new Light);
-
-        // Se añaden los nodos a la escena:
-
-        scene->add ("sphere", model );
-        scene->add ("camera", camera);
-        scene->add ("light" , light );
-
-        return scene;
-    }
-
-    void configure_scene (Render_Node & scene)
-    {
-        scene["light" ]->translate (Vector3(10.f, 10.f, 10.f));
-        scene["camera"]->translate (Vector3( 0.f,  0.f,  5.f));
-    }
-
-    void reset_viewport (const sf::Window & window, Render_Node & scene)
-    {
-        GLsizei width  = GLsizei(window.getSize ().x);
-        GLsizei height = GLsizei(window.getSize ().y);
-
-        scene.get_active_camera ()->set_aspect_ratio (float(width) / height);
-
-        glViewport (0, 0, width, height);
-    }
-
-}
+//namespace bullet_3da
+//{
+//
+//    shared_ptr< Render_Node > create_scene ()
+//    {
+//        // Se crean los elementos (nodos) y la escena a la que se añadirán:
+//
+//        shared_ptr< Render_Node > scene (new Render_Node);
+//        shared_ptr< Model       > model (new Model_Obj("../../../../assets/sphere.obj"));
+//        shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 50.f, 1.f));
+//        shared_ptr< Light       > light (new Light);
+//
+//        // Se añaden los nodos a la escena:
+//
+//        scene->add ("sphere", model );
+//        scene->add ("camera", camera);
+//        scene->add ("light" , light );
+//
+//        return scene;
+//    }
+//
+//    void configure_scene (Render_Node & scene)
+//    {
+//        scene["light" ]->translate (Vector3(10.f, 10.f, 10.f));
+//        scene["camera"]->translate (Vector3( 0.f,  0.f,  5.f));
+//    }
+//
+//    void reset_viewport (const sf::Window & window, Render_Node & scene)
+//    {
+//        GLsizei width  = GLsizei(window.getSize ().x);
+//        GLsizei height = GLsizei(window.getSize ().y);
+//
+//        scene.get_active_camera ()->set_aspect_ratio (float(width) / height);
+//
+//        glViewport (0, 0, width, height);
+//    }
+//
+//}
 
 using namespace bullet_3da;
 
@@ -189,38 +192,18 @@ int main ()
                                                 SIMULATION
     \+ -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-    // Se crea la ventana y el contexto de OpenGL asociado a ella:
+	View view = View();
 
-    sf::Window window
-    (
-        sf::VideoMode(1024, 720),
-        "Bullet Rigid Bodies",
-        sf::Style::Default,
-        sf::ContextSettings(24, 0, 0, 3, 2, sf::ContextSettings::Core)      // Se usa OpenGL 3.2 core profile
-    );
+	Scene scene = Scene();
 
-    // Se determinan las características de OpenGL disponibles en la máquina:
 
-	if (!glt::initialize_opengl_extensions())
-	{
-		exit (-1);
-	}
+    //configure_scene (*scene);
 
-    // Se activa la sincronización vertical:
-
-    window.setVerticalSyncEnabled (true);
-
-    // Se crea y se configura la escena:
-
-    shared_ptr< Render_Node > scene = create_scene ();
-
-    configure_scene (*scene);
-
-    Node * sphere_model = scene->get ("sphere");
+    //Node * sphere_model = scene->get ("sphere");
 
     // Se inicializan algunos elementos de OpenGL:
 
-    reset_viewport (window, *scene);
+	view.reset_viewport(scene);
 
     glClearColor (0.2f, 0.2f, 0.2f, 1.f);
 
@@ -233,7 +216,7 @@ int main ()
 
         sf::Event event;
 
-        while (window.pollEvent (event))
+        while (view.getWindow()->pollEvent (event))
         {
             switch (event.type)
             {
@@ -245,7 +228,7 @@ int main ()
 
                 case sf::Event::Resized:
                 {
-                    reset_viewport (window, *scene);
+					view.reset_viewport(scene);
                     break;
                 }
             }
@@ -265,19 +248,19 @@ int main ()
 
         physics_transform.getOpenGLMatrix (glm::value_ptr(graphics_transform));
 
-        sphere_model->set_transformation (graphics_transform);
+        //sphere_model->set_transformation (graphics_transform);
 
-        sphere_model->scale (0.5f);
+        //sphere_model->scale (0.5f);
 
         // Render the scene:
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        sphere_model->rotate_around_y (0.01f);
+        //sphere_model->rotate_around_y (0.01f);
 
-        scene->render ();
+        scene.render ();
 
-        window.display ();
+        view.getWindow()->display ();
     }
     while (running);
 

@@ -159,10 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\code\Entity.hpp" />
+    <ClInclude Include="..\..\code\Ground.hpp" />
     <ClInclude Include="..\..\code\Physics_World.hpp" />
     <ClInclude Include="..\..\code\Rigid_Body.hpp" />
     <ClInclude Include="..\..\code\Scene.hpp" />
     <ClInclude Include="..\..\code\Shape.hpp" />
+    <ClInclude Include="..\..\code\Sphere.hpp" />
     <ClInclude Include="..\..\code\Trigger.hpp" />
     <ClInclude Include="..\..\code\View.hpp" />
   </ItemGroup>

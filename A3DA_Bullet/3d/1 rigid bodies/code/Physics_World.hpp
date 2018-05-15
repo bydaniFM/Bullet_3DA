@@ -22,7 +22,10 @@ namespace bullet_3da
 	{
 
 		std::unique_ptr< btDiscreteDynamicsWorld >	dynamicsWorld;
-		std::vector< std::shared_ptr< Rigid_Body >> bodies;
+
+		vector< shared_ptr< Rigid_Body >>				bodies;
+		vector< shared_ptr< btDefaultMotionState > >	motionStates;
+		vector< shared_ptr< btCollisionShape     > >	collisionShapes;
 
 	public:
 

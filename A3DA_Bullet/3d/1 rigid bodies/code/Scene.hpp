@@ -49,7 +49,14 @@ namespace bullet_3da
 			//llama al render de graphics scene
 		}
 
-		//Hacer getter
+		shared_ptr<Render_Node> get_graphics_scene()
+		{
+			return graphics_scene;
+		}
+		shared_ptr<Physics_World> get_physics_world()
+		{
+			return physics_world;
+		}
 
 	};
 }
