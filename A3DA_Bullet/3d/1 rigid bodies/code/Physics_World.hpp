@@ -21,7 +21,7 @@ namespace bullet_3da
 	class Physics_World
 	{
 
-		std::unique_ptr< btDiscreteDynamicsWorld >	dynamicsWorld;
+		shared_ptr< btDiscreteDynamicsWorld >	dynamicsWorld;
 
 		vector< shared_ptr< Rigid_Body >>				bodies;
 		vector< shared_ptr< btDefaultMotionState > >	motionStates;
@@ -60,6 +60,11 @@ namespace bullet_3da
 		void step(float time)
 		{
 			dynamicsWorld->stepSimulation(time);
+		}
+
+		shared_ptr<btDiscreteDynamicsWorld> getDynamicsWorld()
+		{
+			return dynamicsWorld;
 		}
 
 	};
