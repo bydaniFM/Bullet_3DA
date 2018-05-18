@@ -27,14 +27,16 @@ namespace bullet_3da
 		vector< shared_ptr< btDefaultMotionState > >	motionStates;
 		vector< shared_ptr< btCollisionShape     > >	collisionShapes;
 
+		btDefaultCollisionConfiguration 	collisionConfiguration;
+		btCollisionDispatcher 				collisionDispatcher;
+		btDbvtBroadphase 					overlappingPairCache;
+		btSequentialImpulseConstraintSolver constraintSolver;
+
 	public:
 
-		Physics_World()
+		Physics_World() : collisionDispatcher(&collisionConfiguration)
 		{
-			btDefaultCollisionConfiguration 	collisionConfiguration;
-			btCollisionDispatcher 				collisionDispatcher(&collisionConfiguration);
-			btDbvtBroadphase 					overlappingPairCache;
-			btSequentialImpulseConstraintSolver constraintSolver;
+			
 
 			dynamicsWorld.reset
 			(
@@ -50,7 +52,7 @@ namespace bullet_3da
 			dynamicsWorld->setGravity(btVector3(0, -10, 0));
 		}
 
-		void add(shared_ptr< Rigid_Body > & body)
+		void add(shared_ptr< Rigid_Body > & body)	//& body
 		{
 			bodies.push_back(body);
 

@@ -23,6 +23,10 @@ namespace bullet_3da
 
 		light->translate(Vector3(10.f, 10.f, 10.f));
 		camera->translate(Vector3(0.f, 0.f, 5.f));
+
+		//Se crea el mundo de físicas de la escena
+
+		this->physics_world = make_shared<Physics_World>();
 	}
 
 	Scene::~Scene()

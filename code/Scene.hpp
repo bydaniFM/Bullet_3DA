@@ -42,6 +42,10 @@ namespace bullet_3da
 		{
 			physics_world->step(deltaTime);
 			//Actualizar todas las entidades
+			for (auto const & entity : entities)
+			{
+				entity.second->update();
+			}
 		}
 
 		void render()
@@ -56,6 +60,12 @@ namespace bullet_3da
 		shared_ptr<Physics_World> get_physics_world()
 		{
 			return physics_world;
+		}
+
+		void add(string name, shared_ptr<Entity> entity)
+		{
+			entities[name] = entity;
+			physics_world->add(entity->getRigidBody());
 		}
 
 	};
