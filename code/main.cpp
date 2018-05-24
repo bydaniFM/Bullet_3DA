@@ -18,6 +18,7 @@
 
 #include <View.hpp>
 #include <Scene.hpp>
+#include <Ground.hpp>
 #include <Sphere.hpp>
 
 using namespace std;
@@ -76,8 +77,13 @@ int main ()
 	Scene scene = Scene();
 
 	Sphere sphere = Sphere(&scene);
-	sphere.getRigidBody()->get()->setWorldTransform(btTransform(btMatrix3x3(), btVector3(0, 10, 0)));
+	//sphere.getRigidBody()->get()->setWorldTransform(btTransform(btMatrix3x3(), btVector3(0, 10, 0)));
+	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, 10, 0));
 	scene.add("sphere", make_shared<Sphere>(sphere));
+
+	Ground ground = Ground(&scene);
+	ground.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
+	scene.add("ground", make_shared<Ground>(ground));
 
     //configure_scene (*scene);
 
@@ -94,7 +100,7 @@ int main ()
 
     do
     {
-		cout << "x: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getX() << "  y: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getY() << endl;
+		//cout << "x: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getX() << "  y: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getY() << endl;
 
         // Read the user input:
 

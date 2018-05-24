@@ -26,7 +26,12 @@ namespace bullet_3da
 
 		Ground(Scene * scene): Entity(scene)
 		{
-			//Entity::physics_model = Static_Rigid_Body();
+			shared_ptr < Shape > shape(new Box_Shape(1.0f, 1.0f,1.0f));
+			shared_ptr<Rigid_Body> rb(new Static_Rigid_Body(shape));
+			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
+			Entity::physics_model = rb; //Rigid_Body(shape);
+
+			Entity::graphics_model.reset(new Model_Obj("../../assets/Ground.obj"));
 		}
 
 

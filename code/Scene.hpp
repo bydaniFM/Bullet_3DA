@@ -66,7 +66,7 @@ namespace bullet_3da
 		{
 			entities[name] = entity;
 			physics_world->add(entity->getRigidBody());
-			graphics_scene->add("esfera", entity->getModel());
+			graphics_scene->add(name, entity->getModel());
 		}
 
 	};
