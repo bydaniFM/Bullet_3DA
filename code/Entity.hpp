@@ -26,7 +26,7 @@ namespace bullet_3da
 
 	protected:
 
-		glt::Model graphics_model;
+		shared_ptr<glt::Model> graphics_model;
 		shared_ptr < Rigid_Body > physics_model;
 
 	public:
@@ -53,12 +53,17 @@ namespace bullet_3da
 			glm::mat4 RotationMatrix = rotate(mat4(), rotation.getAngle(), vec3(rotation.getAxis().getX(), rotation.getAxis().getY(), rotation.getAxis().getZ()));
 			glm::mat4 TranslationMatrix = translate(mat4(), vec3(transform.getX(), transform.getY(), transform.getZ()));
 
-			this->graphics_model.set_transformation(TranslationMatrix);
+			this->graphics_model->set_transformation(TranslationMatrix);
 		}
 
 		shared_ptr < Rigid_Body > getRigidBody()
 		{
 			return physics_model;
+		}
+
+		shared_ptr<glt::Model> getModel()
+		{
+			return graphics_model;
 		}
 
 	};

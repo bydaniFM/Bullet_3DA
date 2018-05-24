@@ -94,7 +94,7 @@ int main ()
 
     do
     {
-		cout << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getY() << endl;
+		cout << "x: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getX() << "  y: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getY() << endl;
 
         // Read the user input:
 

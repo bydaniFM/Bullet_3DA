@@ -50,7 +50,7 @@ namespace bullet_3da
 
 		void render()
 		{
-			//llama al render de graphics scene
+			graphics_scene->render();
 		}
 
 		shared_ptr<Render_Node> get_graphics_scene()
@@ -66,6 +66,7 @@ namespace bullet_3da
 		{
 			entities[name] = entity;
 			physics_world->add(entity->getRigidBody());
+			graphics_scene->add("esfera", entity->getModel());
 		}
 
 	};

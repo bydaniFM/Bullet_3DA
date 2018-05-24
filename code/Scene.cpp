@@ -11,13 +11,13 @@ namespace bullet_3da
 
 		//shared_ptr< Render_Node > scene(new Render_Node);
 		this->graphics_scene = make_shared<Render_Node>();
-		shared_ptr< Model       > model(new Model_Obj("../../../../assets/sphere.obj"));
+		//shared_ptr< Model       > model(new Model_Obj("../../../../assets/sphere.obj"));
 		shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 50.f, 1.f));
 		shared_ptr< Light       > light(new Light);
 
 		// Se añaden los nodos a la escena:
 
-		graphics_scene->add("sphere", model);
+		//graphics_scene->add("sphere", model);
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
 
