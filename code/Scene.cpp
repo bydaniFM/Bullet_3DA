@@ -12,7 +12,7 @@ namespace bullet_3da
 		//shared_ptr< Render_Node > scene(new Render_Node);
 		this->graphics_scene = make_shared<Render_Node>();
 		//shared_ptr< Model       > model(new Model_Obj("../../../../assets/sphere.obj"));
-		shared_ptr< Camera      > camera(new Camera(90.f, 1.f, 50.f, 16.f/9.f));
+		shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 5000.f, /*16.f/9.f*/1.f));
 		shared_ptr< Light       > light(new Light);
 
 		// Se añaden los nodos a la escena:
@@ -21,8 +21,9 @@ namespace bullet_3da
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
 
-		light->translate(Vector3(10.f, 10.f, 10.f));
-		camera->translate(Vector3(0.f, 0.f, 5.f));
+		light->translate(Vector3(0.f, 0.f, 10.f));
+		camera->translate(Vector3(0.f, 5.f, 105.f));
+		//camera->rotate_around_x(10.f);
 
 		//Se crea el mundo de físicas de la escena
 
@@ -31,7 +32,7 @@ namespace bullet_3da
 
 	Scene::~Scene()
 	{
-
+		physics_world.reset();
 	}
 
 	/*void Scene::configure_scene()

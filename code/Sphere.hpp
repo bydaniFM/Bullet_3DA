@@ -26,7 +26,7 @@ namespace bullet_3da
 			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
 			Entity::physics_model = rb; //Rigid_Body(shape);
 
-			Entity::graphics_model.reset(new Model_Obj("../../assets/sphere.obj"));
+			Entity::graphics_model.reset(new Model_Obj("../../assets/Ball.obj"));
 		}
 
 

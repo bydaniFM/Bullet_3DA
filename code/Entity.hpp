@@ -44,16 +44,23 @@ namespace bullet_3da
 		{
 			//Copiar el transform de física a gráficos
 
-			btTransform t;
-			t = this->physics_model->get()->getWorldTransform();
+			//btTransform t;
+			//t = this->physics_model->get()->getWorldTransform();
 
-			btQuaternion rotation = t.getRotation();
-			btVector3 transform = t.getOrigin();
+			//btQuaternion rotation = t.getRotation();
+			//btVector3 transform = t.getOrigin();
 
-			glm::mat4 RotationMatrix = rotate(mat4(), rotation.getAngle(), vec3(rotation.getAxis().getX(), rotation.getAxis().getY(), rotation.getAxis().getZ()));
-			glm::mat4 TranslationMatrix = translate(mat4(), vec3(transform.getX(), transform.getY(), transform.getZ()));
+			//glm::mat4 RotationMatrix = rotate(mat4(), rotation.getAngle(), vec3(rotation.getAxis().getX(), rotation.getAxis().getY(), rotation.getAxis().getZ()));
+			//glm::mat4 TranslationMatrix = translate(mat4(), vec3(transform.getX(), transform.getY(), transform.getZ()));
 
-			this->graphics_model->set_transformation(TranslationMatrix);
+			//this->graphics_model->set_transformation(TranslationMatrix);
+
+			btTransform physics_transform;
+			physics_model->get()->getMotionState()->getWorldTransform(physics_transform);
+			glm::mat4 graphics_transform;
+			physics_transform.getOpenGLMatrix(glm::value_ptr(graphics_transform));
+			graphics_model->set_transformation(graphics_transform);
+			//graphics_model->scale(graphics_scale.x, graphics_scale.y, graphics_scale.z);
 		}
 
 		shared_ptr < Rigid_Body > getRigidBody()
