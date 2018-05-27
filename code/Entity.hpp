@@ -63,6 +63,14 @@ namespace bullet_3da
 			//graphics_model->scale(graphics_scale.x, graphics_scale.y, graphics_scale.z);
 		}
 
+		void translate(float x, float y, float z)
+		{
+			btTransform transform;
+			physics_model->get()->getMotionState()->getWorldTransform(transform);
+			transform.setOrigin(btVector3(x, y, z));
+			physics_model->get()->getMotionState()->setWorldTransform(transform);
+		}
+
 		shared_ptr < Rigid_Body > getRigidBody()
 		{
 			return physics_model;

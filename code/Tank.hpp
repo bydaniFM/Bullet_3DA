@@ -20,18 +20,18 @@ using namespace std;
 
 namespace bullet_3da
 {
-	class Ground: public Entity
+	class Tank : public Entity
 	{
 	public:
 
-		Ground(Scene * scene): Entity(scene)
+		Tank(Scene * scene) : Entity(scene)
 		{
-			shared_ptr < Shape > shape(new Box_Shape(100.0f, 150.0f,50.0f));
-			shared_ptr<Rigid_Body> rb(new Static_Rigid_Body(shape));
+			shared_ptr < Shape > shape(new Box_Shape(10.0f, 10.0f, 10.0f));
+			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 100.f));
 			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
 			Entity::physics_model = rb; //Rigid_Body(shape);
 
-			Entity::graphics_model.reset(new Model_Obj("../../assets/Ground1.obj"));
+			Entity::graphics_model.reset(new Model_Obj("../../assets/Tank.obj"));
 		}
 
 

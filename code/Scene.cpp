@@ -21,9 +21,11 @@ namespace bullet_3da
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
 
-		light->translate(Vector3(0.f, 0.f, 10.f));
-		camera->translate(Vector3(0.f, 5.f, 105.f));
-		//camera->rotate_around_x(10.f);
+		light->translate(Vector3(0.f, 100.f, 0.f));
+		camera->translate(Vector3(-100.f, 100.f, -100.f));
+
+		camera->rotate_around_y(glm::radians(-80.f));
+		camera->rotate_around_x(glm::radians(-20.f));
 
 		//Se crea el mundo de físicas de la escena
 

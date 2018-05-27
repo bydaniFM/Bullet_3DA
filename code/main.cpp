@@ -20,48 +20,10 @@
 #include <Scene.hpp>
 #include <Ground.hpp>
 #include <Sphere.hpp>
+#include <Tank.hpp>
 
 using namespace std;
 using namespace glt;
-
-//namespace bullet_3da
-//{
-//
-//    shared_ptr< Render_Node > create_scene ()
-//    {
-//        // Se crean los elementos (nodos) y la escena a la que se añadirán:
-//
-//        shared_ptr< Render_Node > scene (new Render_Node);
-//        shared_ptr< Model       > model (new Model_Obj("../../../../assets/sphere.obj"));
-//        shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 50.f, 1.f));
-//        shared_ptr< Light       > light (new Light);
-//
-//        // Se añaden los nodos a la escena:
-//
-//        scene->add ("sphere", model );
-//        scene->add ("camera", camera);
-//        scene->add ("light" , light );
-//
-//        return scene;
-//    }
-//
-//    void configure_scene (Render_Node & scene)
-//    {
-//        scene["light" ]->translate (Vector3(10.f, 10.f, 10.f));
-//        scene["camera"]->translate (Vector3( 0.f,  0.f,  5.f));
-//    }
-//
-//    void reset_viewport (const sf::Window & window, Render_Node & scene)
-//    {
-//        GLsizei width  = GLsizei(window.getSize ().x);
-//        GLsizei height = GLsizei(window.getSize ().y);
-//
-//        scene.get_active_camera ()->set_aspect_ratio (float(width) / height);
-//
-//        glViewport (0, 0, width, height);
-//    }
-//
-//}
 
 using namespace bullet_3da;
 
@@ -77,13 +39,27 @@ int main ()
 	Scene scene = Scene();
 
 	Sphere sphere = Sphere(&scene);
-	//sphere.getRigidBody()->get()->setWorldTransform(btTransform(btMatrix3x3(), btVector3(0, 10, 0)));
-	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, 10, 0));
+	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(-50, 10, 0));
+	//sphere.translate(-50, 10, 0);
 	scene.add("sphere", make_shared<Sphere>(sphere));
 
-	Ground ground = Ground(&scene);
-	ground.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
-	scene.add("ground", make_shared<Ground>(ground));
+	Ground ground1 = Ground(&scene);
+	//ground1.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
+	ground1.translate(0, 0, 0);
+	scene.add("ground1", make_shared<Ground>(ground1));
+
+	Ground ground2 = Ground(&scene);
+	ground2.translate(0, 0, -150);
+	scene.add("ground2", make_shared<Ground>(ground2));
+
+	Ground ground3 = Ground(&scene);
+	ground3.translate(0, 0, -300);
+	scene.add("ground3", make_shared<Ground>(ground3));
+
+	Tank tank = Tank(&scene);
+	//tank.translate(20, -100, -20);
+	tank.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 100, -20));
+	scene.add("tank", make_shared<Tank>(tank));
 
     //configure_scene (*scene);
 

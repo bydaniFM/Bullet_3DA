@@ -165,6 +165,7 @@
     <ClInclude Include="..\..\code\Scene.hpp" />
     <ClInclude Include="..\..\code\Shape.hpp" />
     <ClInclude Include="..\..\code\Sphere.hpp" />
+    <ClInclude Include="..\..\code\Tank.hpp" />
     <ClInclude Include="..\..\code\Trigger.hpp" />
     <ClInclude Include="..\..\code\View.hpp" />
   </ItemGroup>
