@@ -10,6 +10,7 @@ Date:	04/05/2018
 #include <memory>
 
 #include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
 
 #include <Shape.hpp>
 

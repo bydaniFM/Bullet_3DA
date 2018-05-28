@@ -11,6 +11,7 @@ Date:	04/05/2018
 #include <memory>
 
 #include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
 
 #include <Scene.hpp>
 #include <Entity.hpp>
@@ -28,9 +29,11 @@ namespace bullet_3da
 		{
 			shared_ptr < Shape > shape(new Box_Shape(10.0f, 10.0f, 10.0f));
 			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 100.f));
-			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
-			Entity::physics_model = rb; //Rigid_Body(shape);
 
+			rb->get()->setDamping(0, 0);
+			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
+
+			Entity::physics_model = rb; //Rigid_Body(shape);
 			Entity::graphics_model.reset(new Model_Obj("../../assets/Tank.obj"));
 		}
 

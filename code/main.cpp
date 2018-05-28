@@ -39,7 +39,7 @@ int main ()
 	Scene scene = Scene();
 
 	Sphere sphere = Sphere(&scene);
-	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(-50, 10, 0));
+	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 110, -20));
 	//sphere.translate(-50, 10, 0);
 	scene.add("sphere", make_shared<Sphere>(sphere));
 
@@ -60,6 +60,8 @@ int main ()
 	//tank.translate(20, -100, -20);
 	tank.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 100, -20));
 	scene.add("tank", make_shared<Tank>(tank));
+	float tank_spd = 100.f;
+	float tank_rot = glm::radians(10.f);
 
     //configure_scene (*scene);
 
@@ -74,11 +76,19 @@ int main ()
     bool running = true;
     int  frame   = 0;
 
+	//btIDebugDraw::DebugDrawModes::DBG_DrawWireframe;
+
+	//Tank states
+	/*bool forward = false;
+	bool right = false;
+	bool left = false;
+	bool reverse = false;*/
+
     do
     {
 		//cout << "x: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getX() << "  y: " << sphere.getRigidBody()->get()->getWorldTransform().getOrigin().getY() << endl;
 
-        // Read the user input:
+        /// Read the user input
 
         sf::Event event;
 
@@ -97,28 +107,55 @@ int main ()
 					view.reset_viewport(scene);
                     break;
                 }
+
+				case sf::Event::KeyPressed:
+				{
+					if (event.key.code == sf::Keyboard::W)
+					{
+						cout << "Presed W" << endl;
+						//tank.getRigidBody()->get()->setLinearVelocity(btVector3(tank_spd, 0, 0));
+						tank.getRigidBody()->get()->applyImpulse
+						(
+							btVector3(10.f, 0, 0),
+							btVector3(0, 0, 0)
+						);
+					}
+					else if (event.key.code == sf::Keyboard::S)
+					{
+						cout << "Presed S" << endl;
+						tank.getRigidBody()->get()->setLinearVelocity(btVector3(-tank_spd, 0, 0));
+					}
+					else if (event.key.code == sf::Keyboard::D)
+					{
+						cout << "Presed D" << endl;
+						tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, tank_rot, 0));
+					}
+					else if (event.key.code == sf::Keyboard::A)
+					{
+						cout << "Presed A" << endl;
+						tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, -tank_rot, 0));
+					}
+				}
+
+				case sf::Event::KeyReleased:
+				{
+					if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
+					{
+						tank.getRigidBody()->get()->setLinearVelocity(btVector3(0, 0, 0));
+					}
+					else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::A)
+					{
+						tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, 0, 0));
+					}
+				}
             }
         }
 
-        //// Perform the simulation:
+		//Check for constant events
 
-        //dynamicsWorld->stepSimulation (1.f / 60.f);
+        
 
-        //// Apply the physics transform to the graphics model:
-
-        //btTransform physics_transform;
-
-        //sphere_body->getMotionState ()->getWorldTransform (physics_transform);
-
-        //glm::mat4 graphics_transform;
-
-        //physics_transform.getOpenGLMatrix (glm::value_ptr(graphics_transform));
-
-        ////sphere_model->set_transformation (graphics_transform);
-
-        ////sphere_model->scale (0.5f);
-
-        //// Render the scene:
+        /// Render the scene:
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -127,6 +164,7 @@ int main ()
 		scene.update(1.f / 60.f);
         scene.render ();
 
+		//scene.get_physics_world()->getDynamicsWorld()->debugDrawWorld();
         view.getWindow()->display ();
     }
     while (running);
