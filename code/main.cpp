@@ -38,23 +38,23 @@ int main ()
 
 	Scene scene = Scene();
 
-	Sphere sphere = Sphere(&scene);
-	sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 110, -20));
-	//sphere.translate(-50, 10, 0);
-	scene.add("sphere", make_shared<Sphere>(sphere));
+	//Sphere sphere = Sphere(&scene);
+	//sphere.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 110, -20));
+	////sphere.translate(-50, 10, 0);
+	//scene.add("sphere", make_shared<Sphere>(sphere));
 
-	Ground ground1 = Ground(&scene);
-	//ground1.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
-	ground1.translate(0, 0, 0);
-	scene.add("ground1", make_shared<Ground>(ground1));
+	//Ground ground1 = Ground(&scene);
+	////ground1.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
+	//ground1.translate(0, 0, 0);
+	//scene.add("ground1", make_shared<Ground>(ground1));
 
-	Ground ground2 = Ground(&scene);
-	ground2.translate(0, 0, -150);
-	scene.add("ground2", make_shared<Ground>(ground2));
+	//Ground ground2 = Ground(&scene);
+	//ground2.translate(0, 0, -150);
+	//scene.add("ground2", make_shared<Ground>(ground2));
 
-	Ground ground3 = Ground(&scene);
-	ground3.translate(0, 0, -300);
-	scene.add("ground3", make_shared<Ground>(ground3));
+	//Ground ground3 = Ground(&scene);
+	//ground3.translate(0, 0, -300);
+	//scene.add("ground3", make_shared<Ground>(ground3));
 
 	Tank tank = Tank(&scene);
 	//tank.translate(20, -100, -20);
@@ -114,10 +114,9 @@ int main ()
 					{
 						cout << "Presed W" << endl;
 						//tank.getRigidBody()->get()->setLinearVelocity(btVector3(tank_spd, 0, 0));
-						tank.getRigidBody()->get()->applyImpulse
+						tank.getRigidBody()->get()->applyCentralImpulse
 						(
-							btVector3(10.f, 0, 0),
-							btVector3(0, 0, 0)
+							btVector3(1000.f, 0, 0)
 						);
 					}
 					else if (event.key.code == sf::Keyboard::S)

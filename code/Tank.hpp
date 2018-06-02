@@ -28,9 +28,9 @@ namespace bullet_3da
 		Tank(Scene * scene) : Entity(scene)
 		{
 			shared_ptr < Shape > shape(new Box_Shape(10.0f, 10.0f, 10.0f));
-			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 100.f));
+			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 10.f));
 
-			rb->get()->setDamping(0, 0);
+			rb->get()->setFriction(0);
 			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 
 			Entity::physics_model = rb; //Rigid_Body(shape);
