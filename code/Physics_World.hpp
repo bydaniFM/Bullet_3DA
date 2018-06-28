@@ -74,5 +74,11 @@ namespace bullet_3da
 			return dynamicsWorld;
 		}
 
+		void addConstraints(btHingeConstraint * hinge)
+		{
+			constraints.push_back(shared_ptr<btHingeConstraint>(hinge));
+			dynamicsWorld->addConstraint(hinge);
+		}
+
 	};
 }

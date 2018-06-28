@@ -38,7 +38,7 @@ namespace bullet_3da
 
 		//void configure_scene();
 
-		void update(float deltaTime)
+		virtual void update(float deltaTime)
 		{
 			physics_world->step(deltaTime);
 			//Actualizar todas las entidades

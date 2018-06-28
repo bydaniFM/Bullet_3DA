@@ -1,5 +1,11 @@
 
 
+#include <iostream>
+/*
+Author: Daniel Fernández
+Date:	27/06/2018
+*/
+
 #include <MyScene.hpp>
 
 namespace bullet_3da
@@ -21,9 +27,14 @@ namespace bullet_3da
 		ground3.translate(0, 0, -300);
 		add("ground3", make_shared<Ground>(ground3));
 
-		Tank tank = Tank(this);
-		//tank.translate(20, -100, -20);
-		tank.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(20, 100, -20));
-		add("tank", make_shared<Tank>(tank));
+		Tank tank = Tank(this, Vector3(20, 100, -20));
+		//add("tank", make_shared<Tank>(tank));
+	}
+
+	void MyScene::update(float deltaTime)
+	{
+		Scene::update(deltaTime);
+
+
 	}
 }

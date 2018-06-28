@@ -24,7 +24,7 @@ namespace bullet_3da
 	{
 	public:
 
-		Ground(Scene * scene): Entity(scene)
+		Ground(Scene * scene): Entity(/*scene*/)
 		{
 			shared_ptr < Shape > shape(new Box_Shape(150.0f, 50.0f, 100.0f));
 			shared_ptr<Rigid_Body> rb(new Static_Rigid_Body(shape));

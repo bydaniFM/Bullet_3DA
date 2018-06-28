@@ -19,7 +19,7 @@ namespace bullet_3da
 	{
 	public:
 
-		Sphere(Scene * scene) : Entity(scene)
+		Sphere(Scene * scene) : Entity(/*scene*/)
 		{
 			shared_ptr < Shape > shape(new Sphere_Shape(1.0f));
 			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 10.f));

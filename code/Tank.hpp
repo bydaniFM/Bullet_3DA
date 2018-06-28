@@ -23,20 +23,18 @@ namespace bullet_3da
 {
 	class Tank : public Entity
 	{
+
+		shared_ptr< btHingeConstraint > turret_constraint;
+		shared_ptr< btHingeConstraint > cannon_constraint;
+
 	public:
 
-		Tank(Scene * scene) : Entity(scene)
+		Tank(Scene * scene, glt::Vector3 position);
+
+		shared_ptr < Rigid_Body > getRigidBody() override
 		{
-			shared_ptr < Shape > shape(new Box_Shape(10.0f, 10.0f, 10.0f));
-			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 10.f));
-
-			rb->get()->setFriction(0);
-			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
-
-			Entity::physics_model = rb; //Rigid_Body(shape);
-			Entity::graphics_model.reset(new Model_Obj("../../assets/Tank.obj"));
+			return physics_model;
 		}
-
 
 	};
 }

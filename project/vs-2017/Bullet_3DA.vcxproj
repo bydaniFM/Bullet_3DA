@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\code\Physics_World.cpp" />
     <ClCompile Include="..\..\code\Rigid_Body.cpp" />
     <ClCompile Include="..\..\code\Scene.cpp" />
+    <ClCompile Include="..\..\code\Tank.cpp" />
     <ClCompile Include="..\..\code\View.cpp" />
   </ItemGroup>
   <ItemGroup>

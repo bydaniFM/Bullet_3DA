@@ -16,5 +16,7 @@ namespace bullet_3da
 	public:
 
 		MyScene();
+
+		void update(float deltaTime) override;
 	};
 }

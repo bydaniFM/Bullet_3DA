@@ -21,8 +21,8 @@ namespace bullet_3da
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
 
-		light->translate(Vector3(0.f, 100.f, 0.f));
-		camera->translate(Vector3(-100.f, 100.f, -100.f));
+		light->translate(Vector3(5.f, 5.f, 5.f));
+		camera->translate(Vector3(-50.f, 100.f, 00.f));
 
 		camera->rotate_around_y(glm::radians(-80.f));
 		camera->rotate_around_x(glm::radians(-20.f));
