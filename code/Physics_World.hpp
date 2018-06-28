@@ -23,9 +23,10 @@ namespace bullet_3da
 
 		shared_ptr< btDiscreteDynamicsWorld >	dynamicsWorld;
 
-		vector< shared_ptr< Rigid_Body >>				bodies;
-		vector< shared_ptr< btDefaultMotionState > >	motionStates;
-		vector< shared_ptr< btCollisionShape     > >	collisionShapes;
+		vector < shared_ptr< Rigid_Body >>				bodies;
+		vector < shared_ptr < btHingeConstraint > >		constraints;
+		/*vector< shared_ptr< btDefaultMotionState > >	motionStates;
+		vector< shared_ptr< btCollisionShape     > >	collisionShapes;*/
 
 		btDefaultCollisionConfiguration 	collisionConfiguration;
 		btCollisionDispatcher 				collisionDispatcher;
@@ -50,6 +51,10 @@ namespace bullet_3da
 			);
 
 			dynamicsWorld->setGravity(btVector3(0, -10, 0));
+		}
+		~Physics_World()
+		{
+			dynamicsWorld.reset();
 		}
 
 		void add(shared_ptr< Rigid_Body > & body)	//& body
