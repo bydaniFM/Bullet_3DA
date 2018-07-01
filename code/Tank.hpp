@@ -24,8 +24,15 @@ namespace bullet_3da
 	class Tank : public Entity
 	{
 
-		shared_ptr< btHingeConstraint > turret_constraint;
-		shared_ptr< btHingeConstraint > cannon_constraint;
+		/*shared_ptr< btHingeConstraint > turret_constraint;
+		shared_ptr< btHingeConstraint > cannon_constraint;*/
+		btHingeConstraint * turret_constraint;
+		btHingeConstraint * cannon_constraint;
+
+		btHingeConstraint * wheel_r1_constraint;
+		btHingeConstraint * wheel_r2_constraint;
+		btHingeConstraint * wheel_l1_constraint;
+		btHingeConstraint * wheel_l2_constraint;
 
 	public:
 

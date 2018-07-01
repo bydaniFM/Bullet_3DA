@@ -27,7 +27,7 @@ namespace bullet_3da
 		ground3.translate(0, 0, -300);
 		add("ground3", make_shared<Ground>(ground3));
 
-		Tank tank = Tank(this, Vector3(20, 100, -20));
+		Tank tank = Tank(this, Vector3(20, 60, -20));
 		//add("tank", make_shared<Tank>(tank));
 	}
 
