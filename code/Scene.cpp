@@ -1,4 +1,9 @@
+/*
 
+Author: Daniel Fernández
+Date:	04/05/2018
+
+*/
 
 #include <Scene.hpp>
 
