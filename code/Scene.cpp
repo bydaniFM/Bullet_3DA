@@ -20,8 +20,8 @@ namespace bullet_3da
 		shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 200.f, 1.f));
 		shared_ptr< Light       > light(new Light);
 
-		light->translate(Vector3(5.f, 5.f, 5.f));
-		camera->translate(Vector3(-50.f, 100.f, 00.f));
+		light->translate(glt::Vector3(5.f, 5.f, 5.f));
+		camera->translate(glt::Vector3(-50.f, 100.f, 00.f));
 
 		camera->rotate_around_y(glm::radians(-80.f));
 		camera->rotate_around_x(glm::radians(-20.f));

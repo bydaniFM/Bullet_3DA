@@ -22,6 +22,8 @@
 #include <Sphere.hpp>
 #include <Tank.hpp>
 
+#include <Input.hpp>
+
 using namespace std;
 using namespace glt;
 
@@ -44,70 +46,81 @@ int main ()
     bool running = true;
     int  frame   = 0;
 
+	Input input(view.getWindow());
 
     do
     {
 		/// Read the user input
 
-        sf::Event event;
+    //    sf::Event event;
 
-        while (view.getWindow()->pollEvent (event))
-        {
-            switch (event.type)
-            {
-                case sf::Event::Closed:
-                {
-                    running = false;
-                    break;
-                }
+    //    while (view.getWindow()->pollEvent (event))
+    //    {
+    //        switch (event.type)
+    //        {
+    //            case sf::Event::Closed:
+    //            {
+    //                running = false;
+    //                break;
+    //            }
 
-                case sf::Event::Resized:
-                {
-					view.reset_viewport(scene);
-                    break;
-                }
+    //            case sf::Event::Resized:
+    //            {
+				//	view.reset_viewport(scene);
+    //                break;
+    //            }
 
-				case sf::Event::KeyPressed:
-				{
-					if (event.key.code == sf::Keyboard::W)
-					{
-						cout << "Presed W" << endl;
-						
-					}
-					else if (event.key.code == sf::Keyboard::S)
-					{
-						cout << "Presed S" << endl;
-						scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(-tank_spd, 0, 0));
-					}
-					else if (event.key.code == sf::Keyboard::D)
-					{
-						cout << "Presed D" << endl;
-						//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, tank_rot, 0));
-					}
-					else if (event.key.code == sf::Keyboard::A)
-					{
-						cout << "Presed A" << endl;
-						//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, -tank_rot, 0));
-					}
-				}
+				//case sf::Event::KeyPressed:
+				//{
+				//	if (event.key.code == sf::Keyboard::W)
+				//	{
+				//		cout << "Presed W" << endl;
+				//		
+				//	}
+				//	else if (event.key.code == sf::Keyboard::S)
+				//	{
+				//		cout << "Presed S" << endl;
+				//		scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(-tank_spd, 0, 0));
+				//	}
+				//	else if (event.key.code == sf::Keyboard::D)
+				//	{
+				//		cout << "Presed D" << endl;
+				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, tank_rot, 0));
+				//	}
+				//	else if (event.key.code == sf::Keyboard::A)
+				//	{
+				//		cout << "Presed A" << endl;
+				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, -tank_rot, 0));
+				//	}
+				//}
 
-				case sf::Event::KeyReleased:
-				{
-					if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
-					{
-						scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(0, 0, 0));
-					}
-					else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::A)
-					{
-						//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, 0, 0));
-					}
-				}
-            }
-        }
+				//case sf::Event::KeyReleased:
+				//{
+				//	if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
+				//	{
+				//		scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(0, 0, 0));
+				//	}
+				//	else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::A)
+				//	{
+				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, 0, 0));
+				//	}
+				//}
+    //        }
+    //    }
 
-		//Check for constant events
+		Input::InputData input_data = input.check();
 
-        
+		if (input_data->at(Input::close))
+		{
+			running = false;
+		}
+
+		if (input_data->at(Input::resize).as_bool())
+		{
+			view.reset_viewport(scene);
+		}
+
+		scene.processInput(input_data);
 
         /// Render the scene:
 
