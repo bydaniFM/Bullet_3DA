@@ -72,11 +72,7 @@ int main ()
 					if (event.key.code == sf::Keyboard::W)
 					{
 						cout << "Presed W" << endl;
-						//tank.getRigidBody()->get()->setLinearVelocity(btVector3(tank_spd, 0, 0));
-						//scene.find("tank")->getRigidBody()->get()->applyImpulse(btVector3(1, 0, 0), tank.getRigidBody()->get()->getCenterOfMassPosition());
-						/*(
-							btVector3(1000.f, 0, 0)
-						);*/
+						
 					}
 					else if (event.key.code == sf::Keyboard::S)
 					{

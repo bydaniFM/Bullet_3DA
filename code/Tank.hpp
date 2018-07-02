@@ -43,5 +43,13 @@ namespace bullet_3da
 			return physics_model;
 		}
 
+		void go_forward(float speed)
+		{
+			wheel_r1_constraint->setMotorTargetVelocity(speed);
+			wheel_r2_constraint->setMotorTargetVelocity(speed);
+			wheel_l1_constraint->setMotorTargetVelocity(speed);
+			wheel_l2_constraint->setMotorTargetVelocity(speed);
+		}
+
 	};
 }

@@ -76,7 +76,7 @@ namespace bullet_3da
 			return graphics_model;
 		}
 
-	protected:
+	/*protected:
 
 		void add_constraints
 		(
@@ -89,7 +89,7 @@ namespace bullet_3da
 			btVector3							rot_body1,
 			btVector3							rot_body2,
 			bool								ref_frame_A
-		);
+		);*/
 
 	};
 }
