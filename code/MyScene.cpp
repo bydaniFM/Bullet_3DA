@@ -42,9 +42,41 @@ namespace bullet_3da
 	{
 		if (input_data->at(Input::button_forward))
 		{
-			cout << "Moving tank forward" << endl;
+			cout << "Pushing forward" << endl;
+			tank->go_forward(2);
+		}
+		else if (input_data->at(Input::button_back))
+		{
+			cout << "Pushing backwards" << endl;
+			tank->go_forward(-1);
+		}
+		else
+		{
+			tank->stop_engine();
+		}
 
-			tank->go_forward(1);
+		if (input_data->at(Input::button_right) && input_data->at(Input::button_left))
+		{
+		}
+		else
+		{
+			if (input_data->at(Input::button_right))
+			{
+				cout << "Turning right" << endl;
+				//tank->turn(-30.f);
+				tank->turn_right();
+			}
+			else if (input_data->at(Input::button_left))
+			{
+				cout << "Turning right" << endl;
+				//tank->turn(30.f);
+				tank->turn_left();
+			}
+			else
+			{
+				//tank->turn(0.f);
+				tank->reset_turn();
+			}
 		}
 
 		//cout << "Mouse pos: " << input_data->at(Input::axis_x) << " " << input_data->at(Input::axis_y) << endl;

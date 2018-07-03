@@ -34,6 +34,8 @@ namespace bullet_3da
 			axis_y,
 			button_forward,
 			button_back,
+			button_right,
+			button_left,
 			button_pan
 		};
 
@@ -60,13 +62,15 @@ namespace bullet_3da
 		{
 			input_data = make_shared < map < input_type, Variant > >();
 
-			(*input_data)[close] = false; // = false;
-			(*input_data)[resize] = false; // = false;
-			(*input_data)[axis_x] = 0.f; // = 0.f;
-			(*input_data)[axis_y] = 0.f; // = 0.f;
-			(*input_data)[button_forward] = false; // = false;
-			(*input_data)[button_back] = false; // = false;
-			(*input_data)[button_pan] = false; // = false;
+			(*input_data)[close] = false;
+			(*input_data)[resize] = false;
+			(*input_data)[axis_x] = 0.f;
+			(*input_data)[axis_y] = 0.f;
+			(*input_data)[button_forward] = false;
+			(*input_data)[button_back] = false;
+			(*input_data)[button_right] = false;
+			(*input_data)[button_left] = false;
+			(*input_data)[button_pan] = false;
 
 			mouse_pos = Vector2i();
 			prev_mouse_pos = Vector2i();
@@ -79,6 +83,9 @@ namespace bullet_3da
 		{
 			bool mouse_moved = false;
 			bool did_resize = false;
+
+			(*input_data)[button_right] = false;
+			(*input_data)[button_left] = false;
 
 			while (window->pollEvent(event))
 			{
@@ -116,6 +123,14 @@ namespace bullet_3da
 						{
 							(*input_data)[button_back] = true;
 						}
+						else if (event.key.code == sf::Keyboard::A)
+						{
+							(*input_data)[button_left] = true;
+						}
+						else if (event.key.code == sf::Keyboard::D)
+						{
+							(*input_data)[button_right] = true;
+						}
 
 						break;
 					}
@@ -129,6 +144,14 @@ namespace bullet_3da
 						else if (event.key.code == sf::Keyboard::S)
 						{
 							(*input_data)[button_back] = false;
+						}
+						else if (event.key.code == sf::Keyboard::A)
+						{
+							(*input_data)[button_left] = false;
+						}
+						else if (event.key.code == sf::Keyboard::D)
+						{
+							(*input_data)[button_right] = false;
 						}
 
 						break;
