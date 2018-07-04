@@ -27,6 +27,14 @@ namespace bullet_3da
 		turret_rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 		shared_ptr<Entity> turret(new Entity(/*scene, */"../../assets/Turret.obj", turret_rb));
 
+		//Cannon
+		shared_ptr < Shape > cannon_shape(new Box_Shape(8.35f, 0.8f, 1.5f));
+		shared_ptr<Rigid_Body> cannon_rb(new Dynamic_Rigid_Body(cannon_shape, 3.f));
+		cannon_rb->get()->getWorldTransform().setOrigin(btVector3(position.x, position.y + 6.7f, position.z + 7.14f));
+		cannon_rb->get()->setRestitution(0.f);
+		cannon_rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
+		shared_ptr<Entity> cannon(new Entity(/*scene, */"../../assets/Cannon.obj", cannon_rb));
+
 
 		// Wheels
 
@@ -74,6 +82,7 @@ namespace bullet_3da
 
 		scene->add("body", body);
 		scene->add("turret", turret);
+		scene->add("cannon", cannon);
 		scene->add("wheel_r1", wheel_r1);
 		scene->add("wheel_r2", wheel_r2);
 		scene->add("wheel_l1", wheel_l1);
@@ -84,6 +93,12 @@ namespace bullet_3da
 		turret_constraint = new btHingeConstraint(*turret_rb->get(), *body_rb->get(), btVector3(0.f, -2.25f, 0.f), btVector3(0.f, 4.f, 0.f), btVector3(0.f, -1.f, 0.f), btVector3(0.f, 0.f, 0.f));//-6.5
 		turret_constraint->enableAngularMotor(true, 0.f, 10.f);
 		scene->get_physics_world()->addConstraints(turret_constraint);
+
+		cannon_constraint = new btHingeConstraint(*cannon_rb->get(), *turret_rb->get(), btVector3(0.f, 0.f, 0.f), btVector3(0.f, 0.f, 7.14f), btVector3(-1.f, 0.f, 0.f), btVector3(0.f, 0.f, 0.f));//-6.5
+		/*double min = -0.174533, max = 0.872665;
+		cannon_constraint->setLimit(min, max);*/
+		cannon_constraint->enableAngularMotor(true, 0.f, 10.f);
+		scene->get_physics_world()->addConstraints(cannon_constraint);
 
 
 		wheel_r1_constraint = new btHingeConstraint(*wheel_rb_r1->get(), *body_rb->get(), btVector3(0.f, 0.f, 0.f), btVector3(-7.f, -3.f, 9.f), btVector3(0.f, 1.f, 0.f), btVector3(0.f, 0.f, 0.f));
@@ -101,6 +116,10 @@ namespace bullet_3da
 		wheel_l2_constraint = new btHingeConstraint(*wheel_rb_l2->get(), *body_rb->get(), btVector3(0.f, 0.f, 0.f), btVector3(7.f, -3.f, -9.5f), btVector3(0.f, 1.f, 0.f), btVector3(0.f, 0.f, 0.f));
 		wheel_l2_constraint->enableAngularMotor(true, 0.f, 10.f);
 		scene->get_physics_world()->addConstraints(wheel_l2_constraint);
+
+
+		/*cannon_rb->get()->setIgnoreCollisionCheck(turret_rb->get(), true);
+		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);*/
 
 		wheel_rb_r1->get()->setIgnoreCollisionCheck(body_rb->get(), true);
 		wheel_rb_r2->get()->setIgnoreCollisionCheck(body_rb->get(), true);

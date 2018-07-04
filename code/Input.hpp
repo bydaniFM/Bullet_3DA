@@ -36,6 +36,8 @@ namespace bullet_3da
 			button_back,
 			button_right,
 			button_left,
+			button_up,
+			button_down,
 			button_pan
 		};
 
@@ -70,6 +72,8 @@ namespace bullet_3da
 			(*input_data)[button_back] = false;
 			(*input_data)[button_right] = false;
 			(*input_data)[button_left] = false;
+			(*input_data)[button_up] = false;
+			(*input_data)[button_down] = false;
 			(*input_data)[button_pan] = false;
 
 			mouse_pos = Vector2i();
@@ -128,6 +132,14 @@ namespace bullet_3da
 						{
 							(*input_data)[button_right] = true;
 						}
+						else if (event.key.code == sf::Keyboard::R)
+						{
+							(*input_data)[button_up] = true;
+						}
+						else if (event.key.code == sf::Keyboard::F)
+						{
+							(*input_data)[button_down] = true;
+						}
 
 						break;
 					}
@@ -149,6 +161,14 @@ namespace bullet_3da
 						else if (event.key.code == sf::Keyboard::D)
 						{
 							(*input_data)[button_right] = false;
+						}
+						else if (event.key.code == sf::Keyboard::R)
+						{
+							(*input_data)[button_up] = false;
+						}
+						else if (event.key.code == sf::Keyboard::F)
+						{
+							(*input_data)[button_down] = false;
 						}
 
 						break;

@@ -72,6 +72,22 @@ namespace bullet_3da
 		{
 			tank->stop_engine();
 		}
+
+
+		if (input_data->at(Input::button_up))
+		{
+			cout << "Raising canonn" << endl;
+			tank->move_cannon(1.f);
+		}
+		else if (input_data->at(Input::button_down))
+		{
+			cout << "Lowering canonn" << endl;
+			tank->move_cannon(-1.f);
+		}
+		else
+		{
+			tank->move_cannon(0.f);
+		}
 		
 
 		//cout << "Mouse pos: " << input_data->at(Input::axis_x) << " " << input_data->at(Input::axis_y) << endl;

@@ -75,5 +75,10 @@ namespace bullet_3da
 			wheel_l2_constraint->setMotorTargetVelocity(0.f);
 		}
 
+		void move_cannon(float speed)
+		{
+			cannon_constraint->setMotorTargetVelocity(speed);
+		}
+
 	};
 }
