@@ -17,7 +17,7 @@ namespace bullet_3da
 		//shared_ptr< Render_Node > scene(new Render_Node);
 		this->graphics_scene = make_shared<Render_Node>();
 		//shared_ptr< Model       > model(new Model_Obj("../../../../assets/sphere.obj"));
-		shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 200.f, 1.f));
+		shared_ptr< Camera      > camera(new Camera(20.f, 1.f, 1000.f, 1.f));
 		shared_ptr< Light       > light(new Light);
 
 		light->translate(glt::Vector3(5.f, 5.f, 5.f));

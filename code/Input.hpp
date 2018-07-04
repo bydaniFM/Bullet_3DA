@@ -84,9 +84,6 @@ namespace bullet_3da
 			bool mouse_moved = false;
 			bool did_resize = false;
 
-			(*input_data)[button_right] = false;
-			(*input_data)[button_left] = false;
-
 			while (window->pollEvent(event))
 			{
 				switch (event.type)

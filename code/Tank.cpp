@@ -32,12 +32,14 @@ namespace bullet_3da
 
 		shared_ptr < Shape > wheel_shape(new Cylinder_Shape(3.75f, 1.3f, 3.75f));
 		btQuaternion wheel_rotation = btQuaternion(0.707f, 0.707f, 0.f, 0.f);
+		float wheel_friction = 1000000.f;
 
 		// wheel r1
 		shared_ptr<Rigid_Body> wheel_rb_r1(new Dynamic_Rigid_Body(wheel_shape, 10.f));
 		wheel_rb_r1->get()->getWorldTransform().setOrigin(btVector3(position.x - 7.f, position.y - 3.f, position.z + 9));
 		wheel_rb_r1->get()->getWorldTransform().setRotation(wheel_rotation);
 		wheel_rb_r1->get()->setRestitution(0.f);
+		//wheel_rb_r1->get()->setFriction(wheel_friction);
 		wheel_rb_r1->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 		shared_ptr<Entity> wheel_r1(new Entity(/*scene, */"../../assets/Wheel.obj", wheel_rb_r1));
 
@@ -46,6 +48,7 @@ namespace bullet_3da
 		wheel_rb_r2->get()->getWorldTransform().setOrigin(btVector3(position.x - 7.f, position.y - 3.f, position.z - 9.5f));
 		wheel_rb_r2->get()->getWorldTransform().setRotation(wheel_rotation);
 		wheel_rb_r2->get()->setRestitution(0.f);
+		//wheel_rb_r1->get()->setFriction(wheel_friction);
 		wheel_rb_r2->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 		shared_ptr<Entity> wheel_r2(new Entity(/*scene, */"../../assets/Wheel.obj", wheel_rb_r2));
 
@@ -54,6 +57,7 @@ namespace bullet_3da
 		wheel_rb_l1->get()->getWorldTransform().setOrigin(btVector3(position.x + 7.f, position.y - 3.f, position.z + 9));
 		wheel_rb_l1->get()->getWorldTransform().setRotation(wheel_rotation);
 		wheel_rb_l1->get()->setRestitution(0.f);
+		//wheel_rb_r1->get()->setFriction(wheel_friction);
 		wheel_rb_l1->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 		shared_ptr<Entity> wheel_l1(new Entity(/*scene, */"../../assets/Wheel.obj", wheel_rb_l1));
 
@@ -62,6 +66,7 @@ namespace bullet_3da
 		wheel_rb_l2->get()->getWorldTransform().setOrigin(btVector3(position.x + 7.f, position.y - 3.f, position.z - 9.5f));
 		wheel_rb_l2->get()->getWorldTransform().setRotation(wheel_rotation);
 		wheel_rb_l2->get()->setRestitution(0.f);
+		//wheel_rb_r1->get()->setFriction(wheel_friction);
 		wheel_rb_l2->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 		shared_ptr<Entity> wheel_l2(new Entity(/*scene, */"../../assets/Wheel.obj", wheel_rb_l2));
 

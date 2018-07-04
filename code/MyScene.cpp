@@ -40,44 +40,39 @@ namespace bullet_3da
 
 	void MyScene::processInput(Input::InputData input_data)
 	{
+		bool moving = false;
+
 		if (input_data->at(Input::button_forward))
 		{
 			cout << "Pushing forward" << endl;
-			tank->go_forward(2);
+			tank->go_forward(5.f);
+			moving = true;
 		}
 		else if (input_data->at(Input::button_back))
 		{
 			cout << "Pushing backwards" << endl;
-			tank->go_forward(-1);
+			tank->go_forward(-2.f);
+			moving = true;
 		}
-		else
+
+		if (input_data->at(Input::button_right))
+		{
+			cout << "Turning right" << endl;
+			tank->turn_right();
+			moving = true;
+		}
+		else if (input_data->at(Input::button_left))
+		{
+			cout << "Turning left" << endl;
+			tank->turn_left();
+			moving = true;
+		}
+		
+		if (!moving)
 		{
 			tank->stop_engine();
 		}
-
-		if (input_data->at(Input::button_right) && input_data->at(Input::button_left))
-		{
-		}
-		else
-		{
-			if (input_data->at(Input::button_right))
-			{
-				cout << "Turning right" << endl;
-				//tank->turn(-30.f);
-				tank->turn_right();
-			}
-			else if (input_data->at(Input::button_left))
-			{
-				cout << "Turning right" << endl;
-				//tank->turn(30.f);
-				tank->turn_left();
-			}
-			else
-			{
-				//tank->turn(0.f);
-				tank->reset_turn();
-			}
-		}
+		
 
 		//cout << "Mouse pos: " << input_data->at(Input::axis_x) << " " << input_data->at(Input::axis_y) << endl;
 		//cout << input_data->at(Input::button_pan) << endl;
