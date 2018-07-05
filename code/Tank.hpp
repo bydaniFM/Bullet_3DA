@@ -1,6 +1,6 @@
 /*
 
-Author: Daniel Fernández
+Author: Daniel Fernï¿½ndez
 Date:	04/05/2018
 
 */
@@ -78,6 +78,36 @@ namespace bullet_3da
 		void move_cannon(float speed)
 		{
 			cannon_constraint->setMotorTargetVelocity(speed);
+		}
+
+		void fire(int count, float force)
+		{
+			float dirX, dirY, dirZ;
+			cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(dirX, dirY, dirZ);
+			btVector3 vec_force(dirX, dirY, dirZ);
+			vec_force.normalize();
+			vec_force.absolute();
+			vec_force *= force;
+
+			btVector3 pos = cannon_constraint->getRigidBodyA().getWorldTransform().getOrigin();
+			btVector3 offset
+			(
+				18.f * glm::cos(dirY) * glm::sin(dirZ),
+				18.f * glm::cos(dirY),
+				-18.f * glm::sin(dirY) * glm::sin(dirZ)
+			);
+			//pos += offset;
+
+			shared_ptr <Sphere> projectile (new  Sphere
+			(
+				scene,
+				pos,
+				cannon_constraint->getRigidBodyA().getWorldTransform().getRotation(),
+				vec_force
+			));
+			
+			std::string name = "projectile" + count;
+			scene->add(name, projectile);
 		}
 
 	};
