@@ -23,10 +23,9 @@ namespace bullet_3da
 
 		shared_ptr< btDiscreteDynamicsWorld >	dynamicsWorld;
 
+		//Not in use right now
 		vector < shared_ptr< Rigid_Body >>				bodies;
 		vector < shared_ptr < btHingeConstraint > >		constraints;
-		/*vector< shared_ptr< btDefaultMotionState > >	motionStates;
-		vector< shared_ptr< btCollisionShape     > >	collisionShapes;*/
 
 		btDefaultCollisionConfiguration 	collisionConfiguration;
 		btCollisionDispatcher 				collisionDispatcher;
@@ -57,7 +56,7 @@ namespace bullet_3da
 			dynamicsWorld.reset();
 		}
 
-		void add(shared_ptr< Rigid_Body > & body)	//& body
+		void add(shared_ptr< Rigid_Body > & body)
 		{
 			bodies.push_back(body);
 
@@ -72,6 +71,12 @@ namespace bullet_3da
 		shared_ptr<btDiscreteDynamicsWorld> getDynamicsWorld()
 		{
 			return dynamicsWorld;
+		}
+
+		void addConstraints(btHingeConstraint * hinge)
+		{
+			constraints.push_back(shared_ptr<btHingeConstraint>(hinge));
+			dynamicsWorld->addConstraint(hinge);
 		}
 
 	};

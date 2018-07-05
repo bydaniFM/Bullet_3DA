@@ -64,7 +64,15 @@ namespace bullet_3da
 		}
 
 	};
-	//btConvexHull
 
-	//btmeshshape
+	class Cylinder_Shape : public Shape
+	{
+	public:
+
+		Cylinder_Shape(float width, float height, float depth)
+			:
+			Shape(std::shared_ptr< btCollisionShape >(new btCylinderShape(btVector3(width, height, depth))))
+		{
+		}
+	};
 }

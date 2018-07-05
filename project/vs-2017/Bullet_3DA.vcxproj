@@ -151,16 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\code\Entity.cpp" />
     <ClCompile Include="..\..\code\main.cpp" />
     <ClCompile Include="..\..\code\MyScene.cpp" />
     <ClCompile Include="..\..\code\Physics_World.cpp" />
     <ClCompile Include="..\..\code\Rigid_Body.cpp" />
     <ClCompile Include="..\..\code\Scene.cpp" />
+    <ClCompile Include="..\..\code\Tank.cpp" />
     <ClCompile Include="..\..\code\View.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\code\Entity.hpp" />
     <ClInclude Include="..\..\code\Ground.hpp" />
+    <ClInclude Include="..\..\code\Input.hpp" />
     <ClInclude Include="..\..\code\MyScene.hpp" />
     <ClInclude Include="..\..\code\Physics_World.hpp" />
     <ClInclude Include="..\..\code\Rigid_Body.hpp" />
@@ -169,6 +172,7 @@
     <ClInclude Include="..\..\code\Sphere.hpp" />
     <ClInclude Include="..\..\code\Tank.hpp" />
     <ClInclude Include="..\..\code\Trigger.hpp" />
+    <ClInclude Include="..\..\code\Variant.hpp" />
     <ClInclude Include="..\..\code\View.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

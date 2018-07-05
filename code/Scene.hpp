@@ -20,6 +20,8 @@
 #include <Entity.hpp>
 #include <Physics_World.hpp>
 
+#include <Input.hpp>
+
 using namespace std;
 using namespace glt;
 
@@ -38,7 +40,7 @@ namespace bullet_3da
 
 		//void configure_scene();
 
-		void update(float deltaTime)
+		virtual void update(float deltaTime)
 		{
 			physics_world->step(deltaTime);
 			//Actualizar todas las entidades
@@ -72,6 +74,10 @@ namespace bullet_3da
 		shared_ptr<Entity> find(string name)
 		{
 			return entities[name];
+		}
+
+		virtual void processInput(Input::InputData input_data)
+		{
 		}
 
 	};

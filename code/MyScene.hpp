@@ -13,8 +13,16 @@ namespace bullet_3da
 	class MyScene : public Scene
 	{
 
+		unique_ptr < Tank > tank;
+
+		int projectile_count;
+
 	public:
 
 		MyScene();
+
+		void update(float deltaTime) override;
+
+		void processInput(Input::InputData input_data) override;
 	};
 }
