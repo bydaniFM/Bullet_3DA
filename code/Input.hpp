@@ -39,7 +39,8 @@ namespace bullet_3da
 			button_up,
 			button_down,
 			button_fire,
-			button_pan
+			button_pan,
+			button_rot
 		};
 
 		typedef shared_ptr < map < input_type, Variant > > InputData;
@@ -77,6 +78,7 @@ namespace bullet_3da
 			(*input_data)[button_down] = false;
 			(*input_data)[button_fire] = false;
 			(*input_data)[button_pan] = false;
+			(*input_data)[button_rot] = false;
 
 			mouse_pos = Vector2i();
 			prev_mouse_pos = Vector2i();
@@ -192,6 +194,10 @@ namespace bullet_3da
 						{
 							(*input_data)[button_pan] = true;
 						}
+						else if(event.mouseButton.button == sf::Mouse::Right)
+						{
+							(*input_data)[button_rot] = true;
+						}
 						break;
 					}
 
@@ -200,6 +206,10 @@ namespace bullet_3da
 						if (event.mouseButton.button == sf::Mouse::Left)
 						{
 							(*input_data)[button_pan] = false;
+						}
+						else if (event.mouseButton.button == sf::Mouse::Right)
+						{
+							(*input_data)[button_rot] = false;
 						}
 						break;
 					}

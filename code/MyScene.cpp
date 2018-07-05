@@ -116,17 +116,27 @@ namespace bullet_3da
 
 		float angle_delta_x = 0;
 		float angle_delta_y = 0;
+		glt::Vector3 displacement(0.f, 0.f, 0.f);
 
 		//Input transformation
-		if (input_data->at(Input::button_pan)) {
+		if (input_data->at(Input::button_rot)) {
 			if (input_data->at(Input::axis_x) || input_data->at(Input::axis_y))
 			{
 				angle_delta_x = input_data->at(Input::axis_x).as_float() * 0.02f;
 				angle_delta_y = input_data->at(Input::axis_y).as_float() * 0.02f;
 			}
 		}
+		else if (input_data->at(Input::button_pan))
+		{
+			if (input_data->at(Input::axis_x) || input_data->at(Input::axis_y))
+			{
+				displacement.x = -input_data->at(Input::axis_x).as_float() * 2.0f;
+				displacement.y = input_data->at(Input::axis_y).as_float() * 2.0f;
+			}
+		}
 
 		camera->rotate_around_x(angle_delta_y);
 		camera->rotate_around_y(angle_delta_x);
+		camera->translate(displacement);
 	}
 }
