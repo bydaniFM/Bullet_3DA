@@ -91,28 +91,23 @@ namespace bullet_3da
 
 		void fire(int count, float force)
 		{
-			float dirX, dirY, dirZ;
-			cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(dirX, dirY, dirZ);
-			btVector3 vec_force(dirX, dirY, dirZ);
-			vec_force.normalize();
-			vec_force.absolute();
-			vec_force *= force;
+			float aX, aY, aZ;
+			cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(aZ, aY, aX);
 
+			float length = 18.f;
 			btVector3 pos = cannon_constraint->getRigidBodyA().getWorldTransform().getOrigin();
-			btVector3 offset
+			btVector3 dir
 			(
-				18.f * glm::cos(dirY) * glm::sin(dirZ),
-				18.f * glm::cos(dirY),
-				-18.f * glm::sin(dirY) * glm::sin(dirZ)
+				glm::sin(aY) * glm::cos(aZ),
+				-glm::sin(aX),
+				glm::cos(aY) * glm::cos(aZ)
 			);
-			pos += offset;
 
 			shared_ptr <Sphere> projectile (new  Sphere
 			(
 				scene,
-				pos,
-				cannon_constraint->getRigidBodyA().getWorldTransform().getRotation(),
-				vec_force
+				pos + dir * length,
+				dir * force
 			));
 			
 			std::string name = "projectile" + count;
