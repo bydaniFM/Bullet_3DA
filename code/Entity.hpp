@@ -48,7 +48,7 @@ namespace bullet_3da
 		}
 
 
-		void update()
+		virtual void update()
 		{
 			btTransform physics_transform;
 			physics_model->get()->getMotionState()->getWorldTransform(physics_transform);

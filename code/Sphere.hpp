@@ -7,9 +7,8 @@ Date:	04/05/2018
 
 #pragma once
 
+#include <ctime>
 #include <memory>
-
-//#include <btBulletDynamicsCommon.h>
 
 #include <Entity.hpp>
 
@@ -17,18 +16,37 @@ namespace bullet_3da
 {
 	class Sphere : public Entity
 	{
+		std::clock_t time;
+
 	public:
 
-		Sphere(Scene * scene) : Entity(/*scene*/)
+		Sphere(Scene * scene, btVector3 position, btQuaternion rotation, btVector3 force) : Entity()
 		{
-			shared_ptr < Shape > shape(new Sphere_Shape(1.0f));
-			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 10.f));
-			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
-			Entity::physics_model = rb; //Rigid_Body(shape);
+			shared_ptr < Shape > shape(new Sphere_Shape(1.5f));
+			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 2.f));
+			rb->get()->getWorldTransform().setOrigin(position);
+			//rb->get()->getWorldTransform().setRotation(rotation);
+			rb->get()->setRestitution(0.f);
+			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 
-			Entity::graphics_model.reset(new Model_Obj("../../assets/Ball.obj"));
+			physics_model = rb;
+			graphics_model.reset(new glt::Model_Obj("../../assets/Ball.obj"));
+			//shared_ptr<Entity> projectile(new Entity("../../assets/Ball.obj", rb));
+
+			rb->get()->applyCentralImpulse(force);
+
+			time = std::clock();
 		}
 
+		void update() override
+		{
+			/*if (std::clock() - time > 2.f * CLOCKS_PER_SEC)
+			{
+				delete this;
+			}*/
+
+			Entity::update();
+		}
 
 	};
 }

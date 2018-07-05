@@ -38,6 +38,7 @@ namespace bullet_3da
 			button_left,
 			button_up,
 			button_down,
+			button_fire,
 			button_pan
 		};
 
@@ -74,6 +75,7 @@ namespace bullet_3da
 			(*input_data)[button_left] = false;
 			(*input_data)[button_up] = false;
 			(*input_data)[button_down] = false;
+			(*input_data)[button_fire] = false;
 			(*input_data)[button_pan] = false;
 
 			mouse_pos = Vector2i();
@@ -87,6 +89,8 @@ namespace bullet_3da
 		{
 			bool mouse_moved = false;
 			bool did_resize = false;
+
+			(*input_data)[button_fire] = false;
 
 			while (window->pollEvent(event))
 			{
@@ -140,6 +144,10 @@ namespace bullet_3da
 						{
 							(*input_data)[button_down] = true;
 						}
+						else if (event.key.code == sf::Keyboard::Space)
+						{
+							(*input_data)[button_fire] = true;
+						}
 
 						break;
 					}
@@ -169,6 +177,10 @@ namespace bullet_3da
 						else if (event.key.code == sf::Keyboard::F)
 						{
 							(*input_data)[button_down] = false;
+						}
+						else if (event.key.code == sf::Keyboard::Space)
+						{
+							(*input_data)[button_fire] = false;
 						}
 
 						break;

@@ -29,6 +29,8 @@ namespace bullet_3da
 
 		tank.reset(new Tank(this, glt::Vector3(20, 60, -20)));
 		//add("tank", make_shared<Tank>(tank));
+
+		projectile_count = 0;
 	}
 
 	void MyScene::update(float deltaTime)
@@ -87,6 +89,13 @@ namespace bullet_3da
 		else
 		{
 			tank->move_cannon(0.f);
+		}
+
+		if (input_data->at(Input::button_fire))
+		{
+			cout << "Fire!" << endl;
+			tank->fire(projectile_count, 200.f);
+			projectile_count++;
 		}
 		
 

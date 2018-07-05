@@ -15,6 +15,8 @@ namespace bullet_3da
 
 		unique_ptr < Tank > tank;
 
+		int projectile_count;
+
 	public:
 
 		MyScene();

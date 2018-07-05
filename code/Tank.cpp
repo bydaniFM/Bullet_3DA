@@ -1,5 +1,5 @@
 /*
-Author: Daniel Fernández
+Author: Daniel Fernï¿½ndez
 Date:	27/06/2018
 */
 
@@ -9,7 +9,8 @@ namespace bullet_3da
 {
 	Tank::Tank(Scene * scene, glt::Vector3 position)
 		:
-		Entity(/*scene*/)
+		Entity(),
+		scene(scene)
 	{
 		// Body
 		shared_ptr < Shape > body_shape(new Box_Shape(15.0f, 4.0f, 7.5f));
