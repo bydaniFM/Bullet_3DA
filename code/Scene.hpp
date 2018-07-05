@@ -31,6 +31,8 @@ namespace bullet_3da
 	{
 		map<string, shared_ptr<Entity>> entities;
 
+	protected:
+
 		shared_ptr<Render_Node> graphics_scene;	//glt::Scene graphics_scene;
 		shared_ptr<Physics_World> physics_world;
 

@@ -12,6 +12,7 @@ namespace bullet_3da
 {
 	class MyScene : public Scene
 	{
+		shared_ptr < Camera > camera;
 
 		unique_ptr < Tank > tank;
 
