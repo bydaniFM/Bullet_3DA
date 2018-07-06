@@ -41,6 +41,8 @@ namespace bullet_3da
 		struct Controls
 		{
 			bool forward, back, right, left, up, down, t_right, t_left = false;
+
+			Controls() { forward = back = right = left = up = down = t_right = t_left = false; }
 		};
 
 	public:

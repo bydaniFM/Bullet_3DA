@@ -56,45 +56,50 @@ namespace bullet_3da
 	{
 		bool moving = false;
 
-		if (input_data->at(Input::button_forward) && !controls.forward)
+		// This ensures we are not performing the same action consecutively, in case the user keeps the button pressed
+
+		if (input_data->at(Input::button_forward))
+			controls.forward = !controls.forward;
+
+		//if (input_data->at(Input::button_forward) && !controls.forward)
+		if(controls.forward)
 		{
 			cout << "Pushing forward" << endl;
 			tank->go_forward(5.f);
 			moving = true;
 		}
-		else if (input_data->at(Input::button_back) && !controls.back)
+		else if (input_data->at(Input::button_back))
 		{
 			cout << "Pushing backwards" << endl;
 			tank->go_forward(-2.f);
 			moving = true;
 		}
 
-		if (input_data->at(Input::button_right) && !controls.right)
+		if (input_data->at(Input::button_right))
 		{
 			cout << "Turning right" << endl;
 			tank->turn_right();
 			moving = true;
 		}
-		else if (input_data->at(Input::button_left) && !controls.left)
+		else if (input_data->at(Input::button_left))
 		{
 			cout << "Turning left" << endl;
 			tank->turn_left();
 			moving = true;
 		}
 		
-		//if (!moving)
-		if(!controls.forward && !controls.back && !controls.right && !controls.left)
+		if (!moving)
 		{
 			tank->stop_engine();
 		}
 
 
-		if (input_data->at(Input::button_up) && !controls.up)
+		if (input_data->at(Input::button_up))
 		{
 			cout << "Raising canonn" << endl;
 			tank->move_cannon(1.f);
 		}
-		else if (input_data->at(Input::button_down) && !controls.down)
+		else if (input_data->at(Input::button_down))
 		{
 			cout << "Lowering canonn" << endl;
 			tank->move_cannon(-1.f);
@@ -104,12 +109,12 @@ namespace bullet_3da
 			tank->move_cannon(0.f);
 		}
 
-		if (input_data->at(Input::button_right2) && !controls.t_right)
+		if (input_data->at(Input::button_right2))
 		{
 			cout << "Rotating cannon right" << endl;
 			tank->rotate_turret(1.f);
 		}
-		else if (input_data->at(Input::button_left2) && !controls.t_left)
+		else if (input_data->at(Input::button_left2))
 		{
 			cout << "Rotating cannon left" << endl;
 			tank->rotate_turret(-1.f);
@@ -118,15 +123,6 @@ namespace bullet_3da
 		{
 			tank->rotate_turret(0.f);
 		}
-
-		controls.forward = input_data->at(Input::button_forward);
-		controls.back	 = input_data->at(Input::button_back);
-		controls.right   = input_data->at(Input::button_right);
-		controls.left    = input_data->at(Input::button_left);
-		controls.up      = input_data->at(Input::button_up);
-		controls.down    = input_data->at(Input::button_down);
-		controls.t_right = input_data->at(Input::button_right2);
-		controls.t_left  = input_data->at(Input::button_left2);
 
 
 		if (input_data->at(Input::button_fire))

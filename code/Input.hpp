@@ -53,6 +53,7 @@ namespace bullet_3da
 		Event event;
 
 		InputData input_data;
+		InputData prev_data;
 
 		Vector2i mouse_pos;
 		Vector2i prev_mouse_pos;
@@ -66,6 +67,8 @@ namespace bullet_3da
 			:
 			window(window)
 		{
+			window->setKeyRepeatEnabled(false);
+
 			input_data = make_shared < map < input_type, Variant > >();
 
 			(*input_data)[close] = false;
@@ -84,6 +87,8 @@ namespace bullet_3da
 			(*input_data)[button_pan] = false;
 			(*input_data)[button_rot] = false;
 
+			prev_data = make_shared < map < input_type, Variant > >(*input_data);
+
 			mouse_pos = Vector2i();
 			prev_mouse_pos = Vector2i();
 
@@ -97,6 +102,8 @@ namespace bullet_3da
 			bool did_resize = false;
 
 			(*input_data)[button_fire] = false;
+
+			(*input_data)[button_forward] = false;
 
 			while (window->pollEvent(event))
 			{
@@ -128,6 +135,14 @@ namespace bullet_3da
 					{
 						if (event.key.code == sf::Keyboard::W)
 						{
+							/*if (!(*input_data)[button_forward])
+							{
+								(*input_data)[button_forward] = true;
+							}
+							else
+							{
+								(*input_data)[button_forward] = false;
+							}*/
 							(*input_data)[button_forward] = true;
 						}
 						else if (event.key.code == sf::Keyboard::S)
@@ -170,7 +185,7 @@ namespace bullet_3da
 					{
 						if (event.key.code == sf::Keyboard::W)
 						{
-							(*input_data)[button_forward] = false;
+							(*input_data)[button_forward] = true;
 						} 
 						else if (event.key.code == sf::Keyboard::S)
 						{
@@ -235,6 +250,19 @@ namespace bullet_3da
 					}
 				}
 			}
+
+		/*	if (event.key.code == sf::Keyboard::W)
+			{
+				if (!(*input_data)[button_forward])
+				{
+					(*input_data)[button_forward] = true;
+				} else
+				{
+					(*input_data)[button_forward] = false;
+				}
+			}*/
+
+			(*prev_data)[button_forward] = (*input_data)[button_forward];
 
 			if (!mouse_moved)
 			{
