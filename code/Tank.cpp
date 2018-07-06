@@ -12,6 +12,15 @@ namespace bullet_3da
 		Entity(),
 		scene(scene)
 	{
+		// Bullets
+
+		for (int i = 0; i < 10; i++)
+		{
+			bullets.push_back(make_shared<Sphere>());
+			std::string name = "projectile" + std::to_string(i);
+			scene->add(name, bullets[i]);
+		}
+
 		// Body
 		shared_ptr < Shape > body_shape(new Box_Shape(15.0f, 4.0f, 7.5f));
 		shared_ptr<Rigid_Body> body_rb(new Dynamic_Rigid_Body(body_shape, 10.f));

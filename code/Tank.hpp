@@ -34,6 +34,8 @@ namespace bullet_3da
 		btHingeConstraint * wheel_l1_constraint;
 		btHingeConstraint * wheel_l2_constraint;
 
+		vector < shared_ptr < Sphere > > bullets;
+
 	public:
 
 		Tank(Scene * scene, glt::Vector3 position);
@@ -103,15 +105,18 @@ namespace bullet_3da
 				glm::cos(aY) * glm::cos(aZ)
 			);
 
-			shared_ptr <Sphere> projectile (new  Sphere
-			(
-				scene,
-				pos + dir * length,
-				dir * force
-			));
-			
-			std::string name = "projectile" + count;
-			scene->add(name, projectile);
+			for (size_t i = 0; i < bullets.size(); ++i)
+			{
+				if (!bullets[i]->getActive())
+				{
+					bullets[i]->launch
+					(
+						pos + dir * length,
+						dir * force
+					);
+					break;
+				}
+			}
 		}
 
 	};

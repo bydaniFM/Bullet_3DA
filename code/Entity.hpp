@@ -29,15 +29,12 @@ namespace bullet_3da
 
 	public:
 
-		Entity(/*Scene * scene*/)
-			/*:
-			scene(*scene)*/
+		Entity()
 		{
 		}
 
-		Entity(/*Scene * scene, */const string & model_path, shared_ptr< Rigid_Body > & physics_model)
+		Entity(const string & model_path, shared_ptr< Rigid_Body > & physics_model)
 			:
-			/*scene(*scene),*/
 			physics_model(physics_model)
 		{
 			graphics_model.reset(new glt::Model_Obj(model_path));

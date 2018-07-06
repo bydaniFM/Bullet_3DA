@@ -2,8 +2,7 @@
 
 #include <iostream>
 /*
-Author: Daniel Fernández
-Date:	27/06/2018
+Author: Daniel Fernï¿½ndezDate:	27/06/2018
 */
 
 #include <MyScene.hpp>
@@ -106,9 +105,14 @@ namespace bullet_3da
 
 		if (input_data->at(Input::button_fire))
 		{
-			cout << "Fire!" << endl;
-			tank->fire(projectile_count, 200.f);
-			projectile_count++;
+			if (std::clock() - time_fire > 1.f * CLOCKS_PER_SEC)
+			{
+				cout << "Fire!" << endl;
+				tank->fire(projectile_count, 200.f);
+				projectile_count++;
+
+				time_fire = std::clock();
+			}
 		}
 		
 

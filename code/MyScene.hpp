@@ -18,6 +18,8 @@ namespace bullet_3da
 
 		int projectile_count;
 
+		std::clock_t time_fire;
+
 	public:
 
 		MyScene();

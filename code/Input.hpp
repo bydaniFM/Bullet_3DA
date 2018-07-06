@@ -36,6 +36,8 @@ namespace bullet_3da
 			button_back,
 			button_right,
 			button_left,
+			button_right2,
+			button_left2,
 			button_up,
 			button_down,
 			button_fire,
@@ -74,6 +76,8 @@ namespace bullet_3da
 			(*input_data)[button_back] = false;
 			(*input_data)[button_right] = false;
 			(*input_data)[button_left] = false;
+			(*input_data)[button_right2] = false;
+			(*input_data)[button_left2] = false;
 			(*input_data)[button_up] = false;
 			(*input_data)[button_down] = false;
 			(*input_data)[button_fire] = false;
@@ -138,6 +142,14 @@ namespace bullet_3da
 						{
 							(*input_data)[button_right] = true;
 						}
+						else if (event.key.code == sf::Keyboard::Q)
+						{
+							(*input_data)[button_left2] = true;
+						}
+						else if (event.key.code == sf::Keyboard::E)
+						{
+							(*input_data)[button_right2] = true;
+						}
 						else if (event.key.code == sf::Keyboard::R)
 						{
 							(*input_data)[button_up] = true;
@@ -171,6 +183,14 @@ namespace bullet_3da
 						else if (event.key.code == sf::Keyboard::D)
 						{
 							(*input_data)[button_right] = false;
+						}
+						else if (event.key.code == sf::Keyboard::Q)
+						{
+							(*input_data)[button_left2] = false;
+						}
+						else if (event.key.code == sf::Keyboard::E)
+						{
+							(*input_data)[button_right2] = false;
 						}
 						else if (event.key.code == sf::Keyboard::R)
 						{
