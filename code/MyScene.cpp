@@ -56,44 +56,45 @@ namespace bullet_3da
 	{
 		bool moving = false;
 
-		if (input_data->at(Input::button_forward))
+		if (input_data->at(Input::button_forward) && !controls.forward)
 		{
 			cout << "Pushing forward" << endl;
 			tank->go_forward(5.f);
 			moving = true;
 		}
-		else if (input_data->at(Input::button_back))
+		else if (input_data->at(Input::button_back) && !controls.back)
 		{
 			cout << "Pushing backwards" << endl;
 			tank->go_forward(-2.f);
 			moving = true;
 		}
 
-		if (input_data->at(Input::button_right))
+		if (input_data->at(Input::button_right) && !controls.right)
 		{
 			cout << "Turning right" << endl;
 			tank->turn_right();
 			moving = true;
 		}
-		else if (input_data->at(Input::button_left))
+		else if (input_data->at(Input::button_left) && !controls.left)
 		{
 			cout << "Turning left" << endl;
 			tank->turn_left();
 			moving = true;
 		}
 		
-		if (!moving)
+		//if (!moving)
+		if(!controls.forward && !controls.back && !controls.right && !controls.left)
 		{
 			tank->stop_engine();
 		}
 
 
-		if (input_data->at(Input::button_up))
+		if (input_data->at(Input::button_up) && !controls.up)
 		{
 			cout << "Raising canonn" << endl;
 			tank->move_cannon(1.f);
 		}
-		else if (input_data->at(Input::button_down))
+		else if (input_data->at(Input::button_down) && !controls.down)
 		{
 			cout << "Lowering canonn" << endl;
 			tank->move_cannon(-1.f);
@@ -103,12 +104,12 @@ namespace bullet_3da
 			tank->move_cannon(0.f);
 		}
 
-		if (input_data->at(Input::button_right2))
+		if (input_data->at(Input::button_right2) && !controls.t_right)
 		{
 			cout << "Rotating cannon right" << endl;
 			tank->rotate_turret(1.f);
 		}
-		else if (input_data->at(Input::button_left2))
+		else if (input_data->at(Input::button_left2) && !controls.t_left)
 		{
 			cout << "Rotating cannon left" << endl;
 			tank->rotate_turret(-1.f);
@@ -117,6 +118,15 @@ namespace bullet_3da
 		{
 			tank->rotate_turret(0.f);
 		}
+
+		controls.forward = input_data->at(Input::button_forward);
+		controls.back	 = input_data->at(Input::button_back);
+		controls.right   = input_data->at(Input::button_right);
+		controls.left    = input_data->at(Input::button_left);
+		controls.up      = input_data->at(Input::button_up);
+		controls.down    = input_data->at(Input::button_down);
+		controls.t_right = input_data->at(Input::button_right2);
+		controls.t_left  = input_data->at(Input::button_left2);
 
 
 		if (input_data->at(Input::button_fire))

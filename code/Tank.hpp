@@ -37,6 +37,13 @@ namespace bullet_3da
 		vector < shared_ptr < Sphere > > bullets;
 
 	public:
+		
+		struct Controls
+		{
+			bool forward, back, right, left, up, down, t_right, t_left = false;
+		};
+
+	public:
 
 		Tank(Scene * scene, glt::Vector3 position);
 

@@ -20,6 +20,8 @@ namespace bullet_3da
 
 		std::clock_t time_fire;
 
+		Tank::Controls controls;
+
 	public:
 
 		MyScene();
