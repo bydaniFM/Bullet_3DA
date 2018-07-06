@@ -45,84 +45,19 @@ namespace bullet_3da
 			return physics_model;
 		}
 
-		void go_forward(float speed)
-		{
-			wheel_r1_constraint->setMotorTargetVelocity(speed);
-			wheel_r2_constraint->setMotorTargetVelocity(speed);
-			wheel_l1_constraint->setMotorTargetVelocity(speed);
-			wheel_l2_constraint->setMotorTargetVelocity(speed);
-		}
+		void go_forward(float speed);
 
-		void stop_engine()
-		{
-			wheel_r1_constraint->setMotorTargetVelocity(0);
-			wheel_r2_constraint->setMotorTargetVelocity(0);
-			wheel_l1_constraint->setMotorTargetVelocity(0);
-			wheel_l2_constraint->setMotorTargetVelocity(0);
-		}
+		void stop_engine();
 
-		void turn_right()
-		{
-			wheel_r1_constraint->setMotorTargetVelocity(0.f);
-			wheel_r2_constraint->setMotorTargetVelocity(0.f);
-			wheel_l1_constraint->setMotorTargetVelocity(+3.f);
-			wheel_l2_constraint->setMotorTargetVelocity(+3.f);
-		}
+		void turn_right();
 
-		void turn_left()
-		{
-			wheel_r1_constraint->setMotorTargetVelocity(+3.f);
-			wheel_r2_constraint->setMotorTargetVelocity(+3.f);
-			wheel_l1_constraint->setMotorTargetVelocity(0.f);
-			wheel_l2_constraint->setMotorTargetVelocity(0.f);
-		}
+		void turn_left();
 
-		void rotate_turret(float speed)
-		{
-			turret_constraint->setMotorTargetVelocity(speed);
-		}
+		void rotate_turret(float speed);
 
-		void move_cannon(float speed)
-		{
-			//Check angle
-			float angleX, angleY, angleZ;
-			cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(angleX, angleY, angleZ);
+		void move_cannon(float speed);
 
-			float step = glm::radians(speed);
-
-			if(angleZ- step < glm::radians(30.f) && angleZ- step > glm::radians(-30.f))
-				cannon_constraint->setMotorTargetVelocity(speed);
-			else
-				cannon_constraint->setMotorTargetVelocity(0);
-		}
-
-		void fire(int count, float force)
-		{
-			float aX, aY, aZ;
-			cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(aZ, aY, aX);
-
-			float length = 18.f;
-			btVector3 pos = cannon_constraint->getRigidBodyA().getWorldTransform().getOrigin();
-			btVector3 dir
-			(
-				glm::sin(aY) * glm::cos(aZ),
-				-glm::sin(aX),
-				glm::cos(aY) * glm::cos(aZ)
-			);
-
-			for (size_t i = 0; i < bullets.size(); ++i)
-			{
-				if (!bullets[i]->getActive())
-				{
-					bullets[i]->launch
-					(
-						pos + dir * length,
-						dir * force
-					);
-					break;
-				}
-			}
-		}
+		void fire(int count, float force);
 
 	};
 }
