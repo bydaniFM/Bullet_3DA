@@ -58,15 +58,17 @@ namespace bullet_3da
 
 		// This ensures we are not performing the same action consecutively, in case the user keeps the button pressed
 
-		if (input_data->at(Input::button_forward))
+		if (input_data->at(Input::button_forward)) {
 			controls.forward = !controls.forward;
-
-		//if (input_data->at(Input::button_forward) && !controls.forward)
-		if(controls.forward)
-		{
-			cout << "Pushing forward" << endl;
-			tank->go_forward(5.f);
-			moving = true;
+			if (controls.forward)
+			{
+				cout << "Pushing forward" << endl;
+				tank->go_forward(5.f);
+				moving = true;
+			} else
+			{
+				tank->stop_engine();
+			}
 		}
 		else if (input_data->at(Input::button_back))
 		{
@@ -88,10 +90,10 @@ namespace bullet_3da
 			moving = true;
 		}
 		
-		if (!moving)
+	/*	if (!moving)
 		{
 			tank->stop_engine();
-		}
+		}*/
 
 
 		if (input_data->at(Input::button_up))
