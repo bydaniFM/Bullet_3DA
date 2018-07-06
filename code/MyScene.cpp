@@ -1,9 +1,9 @@
-
+/*
+Author: Daniel Fernández
+Date:	27/06/2018
+*/
 
 #include <iostream>
-/*
-Author: Daniel Fernï¿½ndezDate:	27/06/2018
-*/
 
 #include <MyScene.hpp>
 
@@ -102,6 +102,22 @@ namespace bullet_3da
 		{
 			tank->move_cannon(0.f);
 		}
+
+		if (input_data->at(Input::button_right2))
+		{
+			cout << "Rotating cannon right" << endl;
+			tank->rotate_turret(1.f);
+		}
+		else if (input_data->at(Input::button_left2))
+		{
+			cout << "Rotating cannon left" << endl;
+			tank->rotate_turret(-1.f);
+		}
+		else
+		{
+			tank->rotate_turret(0.f);
+		}
+
 
 		if (input_data->at(Input::button_fire))
 		{

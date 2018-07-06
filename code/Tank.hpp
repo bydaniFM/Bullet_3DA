@@ -77,6 +77,11 @@ namespace bullet_3da
 			wheel_l2_constraint->setMotorTargetVelocity(0.f);
 		}
 
+		void rotate_turret(float speed)
+		{
+			turret_constraint->setMotorTargetVelocity(speed);
+		}
+
 		void move_cannon(float speed)
 		{
 			//Check angle
