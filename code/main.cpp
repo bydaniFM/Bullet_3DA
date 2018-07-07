@@ -52,62 +52,6 @@ int main ()
     {
 		/// Read the user input
 
-    //    sf::Event event;
-
-    //    while (view.getWindow()->pollEvent (event))
-    //    {
-    //        switch (event.type)
-    //        {
-    //            case sf::Event::Closed:
-    //            {
-    //                running = false;
-    //                break;
-    //            }
-
-    //            case sf::Event::Resized:
-    //            {
-				//	view.reset_viewport(scene);
-    //                break;
-    //            }
-
-				//case sf::Event::KeyPressed:
-				//{
-				//	if (event.key.code == sf::Keyboard::W)
-				//	{
-				//		cout << "Presed W" << endl;
-				//		
-				//	}
-				//	else if (event.key.code == sf::Keyboard::S)
-				//	{
-				//		cout << "Presed S" << endl;
-				//		scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(-tank_spd, 0, 0));
-				//	}
-				//	else if (event.key.code == sf::Keyboard::D)
-				//	{
-				//		cout << "Presed D" << endl;
-				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, tank_rot, 0));
-				//	}
-				//	else if (event.key.code == sf::Keyboard::A)
-				//	{
-				//		cout << "Presed A" << endl;
-				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, -tank_rot, 0));
-				//	}
-				//}
-
-				//case sf::Event::KeyReleased:
-				//{
-				//	if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
-				//	{
-				//		scene.find("tank")->getRigidBody()->get()->setLinearVelocity(btVector3(0, 0, 0));
-				//	}
-				//	else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::A)
-				//	{
-				//		//tank.getRigidBody()->get()->setAngularVelocity(btVector3(0, 0, 0));
-				//	}
-				//}
-    //        }
-    //    }
-
 		Input::InputData input_data = input.check();
 
 		if (input_data->at(Input::close))
@@ -126,12 +70,9 @@ int main ()
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //sphere_model->rotate_around_y (0.01f);
-
 		scene.update(1.f / 60.f);
         scene.render ();
 
-		//scene.get_physics_world()->getDynamicsWorld()->debugDrawWorld();
         view.getWindow()->display ();
     }
     while (running);

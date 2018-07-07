@@ -20,7 +20,7 @@ namespace bullet_3da
 
 		std::clock_t time;
 
-		shared_ptr < Rigid_Body > rb;
+		//shared_ptr < Rigid_Body > this->getRigidBody();
 
 		int flags;
 
@@ -30,15 +30,15 @@ namespace bullet_3da
 		Sphere(/*Scene * scene, btVector3 position, btVector3 force*/) : Entity()
 		{
 			shared_ptr < Shape > shape(new Sphere_Shape(1.5f));
-			rb.reset(new Dynamic_Rigid_Body(shape, 2.f));
+			shared_ptr < Rigid_Body > rb(new Dynamic_Rigid_Body(shape, 2.f));
 			rb->get()->setRestitution(0.f);
 			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
 
 			physics_model = rb;
 			graphics_model.reset(new glt::Model_Obj("../../assets/Ball.obj"));
 
-			flags = rb->get()->getCollisionFlags();
-			rb->get()->setCollisionFlags(flags | btCollisionObject::CF_KINEMATIC_OBJECT);
+			flags = this->getRigidBody()->get()->getCollisionFlags();
+			this->getRigidBody()->get()->setCollisionFlags(flags | btCollisionObject::CF_KINEMATIC_OBJECT);
 
 			active = false;
 
@@ -54,9 +54,11 @@ namespace bullet_3da
 					active = false;
 
 					//The rigid body is stopped and set to kinematic to save resources
-					rb->get()->setLinearVelocity(btVector3(0.f, 0.f, 0.f));
-					rb->get()->setAngularVelocity(btVector3(0.f, 0.f, 0.f));
-					rb->get()->setCollisionFlags(flags | btCollisionObject::CF_KINEMATIC_OBJECT);
+					this->getRigidBody()->get()->setLinearVelocity(btVector3(0.f, 0.f, 0.f));
+					this->getRigidBody()->get()->setAngularVelocity(btVector3(0.f, 0.f, 0.f));
+					this->getRigidBody()->get()->setCollisionFlags(flags | btCollisionObject::CF_KINEMATIC_OBJECT);
+
+					this->getModel()->set_visible(false);
 				}
 			}
 
@@ -68,11 +70,13 @@ namespace bullet_3da
 			active = true;
 
 			//The rigidbody is set back to non-kinematic
-			rb->get()->setCollisionFlags(flags);
+			this->getRigidBody()->get()->setCollisionFlags(flags);
 
-			rb->get()->getWorldTransform().setOrigin(position);
-			rb->get()->applyCentralImpulse(force);
+			this->getRigidBody()->get()->getWorldTransform().setOrigin(position);
+			this->getRigidBody()->get()->applyCentralImpulse(force);
 
+			this->getModel()->set_visible(true);
+			
 			time = std::clock();
 		}
 

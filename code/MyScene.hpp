@@ -5,6 +5,7 @@ Date:	27/06/2018
 
 #include <Scene.hpp>
 
+#include <Platform.hpp>
 #include <Ground.hpp>
 #include <Tank.hpp>
 

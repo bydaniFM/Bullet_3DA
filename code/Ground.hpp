@@ -24,12 +24,11 @@ namespace bullet_3da
 	{
 	public:
 
-		Ground(Scene * scene): Entity(/*scene*/)
+		Ground(): Entity()
 		{
-			shared_ptr < Shape > shape(new Box_Shape(150.0f, 50.0f, 100.0f));
+			shared_ptr < Shape > shape(new Box_Shape(75.0f, 25.0f, 50.0f));
 			shared_ptr<Rigid_Body> rb(new Static_Rigid_Body(shape));
-			//rb->get()->getWorldTransform().setOrigin(btVector3(0, 10.f, 0));
-			Entity::physics_model = rb; //Rigid_Body(shape);
+			Entity::physics_model = rb;
 
 			Entity::graphics_model.reset(new Model_Obj("../../assets/Ground1.obj"));
 		}

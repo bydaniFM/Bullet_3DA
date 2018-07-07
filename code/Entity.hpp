@@ -61,6 +61,7 @@ namespace bullet_3da
 			physics_model->get()->getMotionState()->getWorldTransform(transform);
 			transform.setOrigin(btVector3(x, y, z));
 			physics_model->get()->getMotionState()->setWorldTransform(transform);
+			physics_model->get()->getWorldTransform().setOrigin(btVector3(x, y, z));
 		}
 
 		virtual shared_ptr < Rigid_Body > getRigidBody()

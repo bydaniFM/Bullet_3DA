@@ -17,29 +17,32 @@ namespace bullet_3da
 		shared_ptr< Light       > light(new Light);
 
 		light->translate(glt::Vector3(5.f, 5.f, 5.f));
-		camera->translate(glt::Vector3(-50.f, 100.f, 00.f));
+		camera->translate(glt::Vector3(-100.f, 70.f, 00.f));
 
 		camera->rotate_around_y(glm::radians(-80.f));
-		camera->rotate_around_x(glm::radians(-20.f));
+		camera->rotate_around_x(glm::radians(-10.f));
 
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
 
 
-		Ground ground1 = Ground(this);
-		//ground1.getRigidBody()->get()->getWorldTransform().setOrigin(btVector3(0, -10, 0));
+		Ground ground1 = Ground();
 		ground1.translate(0, 0, 0);
 		add("ground1", make_shared<Ground>(ground1));
 
-		Ground ground2 = Ground(this);
+		Ground ground2 = Ground();
 		ground2.translate(0, 0, -150);
 		add("ground2", make_shared<Ground>(ground2));
 
-		Ground ground3 = Ground(this);
+		Ground ground3 = Ground();
 		ground3.translate(0, 0, -300);
 		add("ground3", make_shared<Ground>(ground3));
 
-		tank.reset(new Tank(this, glt::Vector3(20, 60, -20)));
+		Platform moving_platform = Platform();
+		moving_platform.translate(0, 20, -75);
+		add("moving_platform", make_shared<Platform>(moving_platform));
+
+		tank.reset(new Tank(this, glt::Vector3(20, 35, -20)));
 		//add("tank", make_shared<Tank>(tank));
 
 		projectile_count = 0;
@@ -53,7 +56,8 @@ namespace bullet_3da
 	void MyScene::processInput(Input::InputData input_data)
 	{
 
-		// This ensures we are not performing the same action consecutively, in case the user keeps the button pressed
+		// "controls" is used to ensure we are not performing the same action consecutively,
+		// in case the user keeps the button pressed
 
 		//-----------Tank-Movement-------------//
 
@@ -99,6 +103,7 @@ namespace bullet_3da
 		{
 			tank->stop_engine();
 		}
+
 
 		//-----------Cannon-Movement-------------//
 
@@ -155,6 +160,7 @@ namespace bullet_3da
 			tank->rotate_turret(0.f);
 		}
 
+
 		//-----------Tank-Shooting-------------//
 
 		if (input_data->at(Input::button_fire))
@@ -176,7 +182,6 @@ namespace bullet_3da
 		float angle_delta_y = 0;
 		glt::Vector3 displacement(0.f, 0.f, 0.f);
 
-		//Input transformation
 		if (input_data->at(Input::button_rot)) {
 			if (input_data->at(Input::axis_x) || input_data->at(Input::axis_y))
 			{
