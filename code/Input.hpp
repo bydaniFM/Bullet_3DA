@@ -66,6 +66,8 @@ namespace bullet_3da
 			:
 			window(window)
 		{
+			window->setKeyRepeatEnabled(false);
+
 			input_data = make_shared < map < input_type, Variant > >();
 
 			(*input_data)[close] = false;
@@ -96,6 +98,14 @@ namespace bullet_3da
 			bool mouse_moved = false;
 			bool did_resize = false;
 
+			(*input_data)[button_forward] = false;
+			(*input_data)[button_back] = false;
+			(*input_data)[button_right] = false;
+			(*input_data)[button_left] = false;
+			(*input_data)[button_right2] = false;
+			(*input_data)[button_left2] = false;
+			(*input_data)[button_up] = false;
+			(*input_data)[button_down] = false;
 			(*input_data)[button_fire] = false;
 
 			while (window->pollEvent(event))
@@ -170,39 +180,39 @@ namespace bullet_3da
 					{
 						if (event.key.code == sf::Keyboard::W)
 						{
-							(*input_data)[button_forward] = false;
+							(*input_data)[button_forward] = true;
 						} 
 						else if (event.key.code == sf::Keyboard::S)
 						{
-							(*input_data)[button_back] = false;
+							(*input_data)[button_back] = true;
 						}
 						else if (event.key.code == sf::Keyboard::A)
 						{
-							(*input_data)[button_left] = false;
+							(*input_data)[button_left] = true;
 						}
 						else if (event.key.code == sf::Keyboard::D)
 						{
-							(*input_data)[button_right] = false;
+							(*input_data)[button_right] = true;
 						}
 						else if (event.key.code == sf::Keyboard::Q)
 						{
-							(*input_data)[button_left2] = false;
+							(*input_data)[button_left2] = true;
 						}
 						else if (event.key.code == sf::Keyboard::E)
 						{
-							(*input_data)[button_right2] = false;
+							(*input_data)[button_right2] = true;
 						}
 						else if (event.key.code == sf::Keyboard::R)
 						{
-							(*input_data)[button_up] = false;
+							(*input_data)[button_up] = true;
 						}
 						else if (event.key.code == sf::Keyboard::F)
 						{
-							(*input_data)[button_down] = false;
+							(*input_data)[button_down] = true;
 						}
 						else if (event.key.code == sf::Keyboard::Space)
 						{
-							(*input_data)[button_fire] = false;
+							(*input_data)[button_fire] = true;
 						}
 
 						break;

@@ -37,6 +37,15 @@ namespace bullet_3da
 		vector < shared_ptr < Sphere > > bullets;
 
 	public:
+		
+		struct Controls
+		{
+			bool forward, back, right, left, up, down, t_right, t_left = false;
+
+			Controls() { forward = back = right = left = up = down = t_right = t_left = false; }
+		};
+
+	public:
 
 		Tank(Scene * scene, glt::Vector3 position);
 
@@ -56,6 +65,8 @@ namespace bullet_3da
 		void rotate_turret(float speed);
 
 		void move_cannon(float speed);
+
+		void check_cannon_rotation(float speed);
 
 		void fire(int count, float force);
 

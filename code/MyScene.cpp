@@ -48,76 +48,114 @@ namespace bullet_3da
 	void MyScene::update(float deltaTime)
 	{
 		Scene::update(deltaTime);
-
-
 	}
 
 	void MyScene::processInput(Input::InputData input_data)
 	{
-		bool moving = false;
+
+		// This ensures we are not performing the same action consecutively, in case the user keeps the button pressed
+
+		//-----------Tank-Movement-------------//
 
 		if (input_data->at(Input::button_forward))
 		{
-			cout << "Pushing forward" << endl;
-			tank->go_forward(5.f);
-			moving = true;
+			controls.forward = !controls.forward;
+			if (controls.forward)
+			{
+				cout << "Pushing forward" << endl;
+				tank->go_forward(5.f);
+			}
 		}
 		else if (input_data->at(Input::button_back))
 		{
-			cout << "Pushing backwards" << endl;
-			tank->go_forward(-2.f);
-			moving = true;
+			controls.back = !controls.back;
+			if (controls.back)
+			{
+				cout << "Pushing backwards" << endl;
+				tank->go_forward(-2.f);
+			}
 		}
 
 		if (input_data->at(Input::button_right))
 		{
-			cout << "Turning right" << endl;
-			tank->turn_right();
-			moving = true;
+			controls.right = !controls.right;
+			if (controls.right)
+			{
+				cout << "Turning right" << endl;
+				tank->turn_right();
+			}
 		}
 		else if (input_data->at(Input::button_left))
 		{
-			cout << "Turning left" << endl;
-			tank->turn_left();
-			moving = true;
+			controls.left = !controls.left;
+			if (controls.left)
+			{
+				cout << "Turning left" << endl;
+				tank->turn_left();
+			}
 		}
 		
-		if (!moving)
+		if(!controls.forward && !controls.back && !controls.right && !controls.left)
 		{
 			tank->stop_engine();
 		}
 
+		//-----------Cannon-Movement-------------//
 
 		if (input_data->at(Input::button_up))
 		{
-			cout << "Raising canonn" << endl;
-			tank->move_cannon(1.f);
+			controls.up = !controls.up;
+			if (controls.up)
+			{
+				cout << "Raising canonn" << endl;
+				tank->move_cannon(1.f);
+			}
 		}
 		else if (input_data->at(Input::button_down))
 		{
-			cout << "Lowering canonn" << endl;
-			tank->move_cannon(-1.f);
+			controls.down = !controls.down;
+			if (controls.down)
+			{
+				cout << "Lowering canonn" << endl;
+				tank->move_cannon(-1.f);
+			}
 		}
+
+		if(controls.up)
+			tank->check_cannon_rotation(1.f);
+		else if (controls.down)
+			tank->check_cannon_rotation(-1.f);
 		else
-		{
 			tank->move_cannon(0.f);
-		}
+		
+
+		//-----------Turret-Movement-------------//
 
 		if (input_data->at(Input::button_right2))
 		{
-			cout << "Rotating cannon right" << endl;
-			tank->rotate_turret(1.f);
+			controls.t_right = !controls.t_right;
+			if (controls.t_right)
+			{
+				cout << "Rotating cannon right" << endl;
+				tank->rotate_turret(1.f);
+			}
 		}
 		else if (input_data->at(Input::button_left2))
 		{
-			cout << "Rotating cannon left" << endl;
-			tank->rotate_turret(-1.f);
+			controls.t_left = !controls.t_left;
+			if (controls.t_left)
+			{
+				cout << "Rotating cannon left" << endl;
+				tank->rotate_turret(-1.f);
+			}
 		}
-		else
+		
+		if(!controls.t_right && !controls.t_left)
 		{
 			tank->rotate_turret(0.f);
 		}
 
+		//-----------Tank-Shooting-------------//
 
 		if (input_data->at(Input::button_fire))
 		{
@@ -132,7 +170,7 @@ namespace bullet_3da
 		}
 		
 
-		// Camera pan
+		//-----------Camera-Movement-------------//
 
 		float angle_delta_x = 0;
 		float angle_delta_y = 0;
