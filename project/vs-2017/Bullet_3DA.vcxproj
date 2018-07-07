@@ -165,6 +165,7 @@
     <ClInclude Include="..\..\code\Entity.hpp" />
     <ClInclude Include="..\..\code\Ground.hpp" />
     <ClInclude Include="..\..\code\Input.hpp" />
+    <ClInclude Include="..\..\code\Key.hpp" />
     <ClInclude Include="..\..\code\MyScene.hpp" />
     <ClInclude Include="..\..\code\Physics_World.hpp" />
     <ClInclude Include="..\..\code\Platform.hpp" />

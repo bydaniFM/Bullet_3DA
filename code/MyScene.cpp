@@ -43,23 +43,61 @@ namespace bullet_3da
 		moving_platform.translate(0, 20, -75);
 		add("moving_platform", make_shared<Platform>(moving_platform));
 
+		Key key;
+		key.translate(50, 50, 30);
+		add("key", make_shared<Key>(key));
+
 		Wall wall;
 		wall.translate(25, 55, -150);
 		add("wall", make_shared<Wall>(wall));
 
-		Door door;
-		door.translate(-50, 55, -150);
-		add("door", make_shared<Door>(door));
+		door.reset(new Door());
+		door->translate(-50, 55, -150);
+		add("door", door);
 
 		tank.reset(new Tank(this, glt::Vector3(20, 35, -20)));
 		//add("tank", make_shared<Tank>(tank));
 
 		projectile_count = 0;
+
+		door_opened = false;
 	}
 
 	void MyScene::update(float deltaTime)
 	{
 		Scene::update(deltaTime);
+
+		// Collision check
+
+		int   manifold_count = physics_world->getDynamicsWorld()->getDispatcher()->getNumManifolds();
+
+		for (int i = 0; i < manifold_count; i++)
+		{
+			btPersistentManifold   *   manifold = physics_world->getDynamicsWorld()->getDispatcher()->getManifoldByIndexInternal(i);
+			btCollisionObject   *   object_a = (btCollisionObject   *)(manifold->getBody0());
+			btCollisionObject   *   object_b = (btCollisionObject   *)(manifold->getBody1());
+			int   numContacts = manifold->getNumContacts();
+			for (int j = 0; j < numContacts; j++)
+			{
+				btManifoldPoint   &   point = manifold->getContactPoint(j);
+				if (point.getDistance() < 0.f)
+				{
+					// Check key and tank
+					if (door_opened == false) {
+
+						btRigidBody * key = get_entity("key")->getRigidBody()->get();
+						btRigidBody * body = get_entity("body")->getRigidBody()->get();
+
+						if ((object_a == key && object_b == body) || (object_a == body && object_b == key))
+						{
+							cout << "Door activated" << endl;
+							door->open();
+							door_opened = true;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void MyScene::processInput(Input::InputData input_data)

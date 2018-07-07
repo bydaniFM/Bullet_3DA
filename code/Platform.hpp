@@ -32,6 +32,8 @@ namespace bullet_3da
 			shared_ptr < Shape > shape(new Box_Shape(30.0f, 5.0f, 25.0f));
 			shared_ptr<Rigid_Body> rb(new Dynamic_Rigid_Body(shape, 5.f));
 
+			rb->get()->btCollisionObject::setActivationState(DISABLE_DEACTIVATION);
+
 			//Allow movement on one axis only
 			rb->get()->setLinearFactor(btVector3(1, 0, 0));
 			rb->get()->setAngularFactor(btVector3(0, 0, 0));

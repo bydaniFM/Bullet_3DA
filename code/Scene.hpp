@@ -73,7 +73,7 @@ namespace bullet_3da
 			graphics_scene->add(name, entity->getModel());
 		}
 
-		shared_ptr<Entity> find(string name)
+		shared_ptr<Entity> get_entity(string name)
 		{
 			return entities[name];
 		}

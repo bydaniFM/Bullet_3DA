@@ -10,6 +10,7 @@ Date:	27/06/2018
 #include <Door.hpp>
 #include <Tank.hpp>
 #include <Wall.hpp>
+#include <Key.hpp>
 
 namespace bullet_3da
 {
@@ -18,12 +19,15 @@ namespace bullet_3da
 		shared_ptr < Camera > camera;
 
 		unique_ptr < Tank > tank;
+		shared_ptr < Door > door;
 
 		int projectile_count;
 
 		std::clock_t time_fire;
 
 		Tank::Controls controls;
+
+		bool door_opened;
 
 	public:
 
