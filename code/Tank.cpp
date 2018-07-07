@@ -182,16 +182,32 @@ namespace bullet_3da
 
 	void Tank::move_cannon(float speed)
 	{
+		////Check angle
+		//float angleX, angleY, angleZ;
+		//cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(angleX, angleY, angleZ);
+
+		//float step = glm::radians(speed);
+
+		//if (angleZ - step < glm::radians(30.f) && angleZ - step > glm::radians(-30.f))
+			cannon_constraint->setMotorTargetVelocity(speed);
+		/*else
+			cannon_constraint->setMotorTargetVelocity(0);*/
+	}
+
+	void Tank::check_cannon_rotation(float speed)
+	{
 		//Check angle
 		float angleX, angleY, angleZ;
 		cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(angleX, angleY, angleZ);
 
+		//float step = cannon_constraint->getRigidBodyA().getAngularVelocity().norm();
 		float step = glm::radians(speed);
 
 		if (angleZ - step < glm::radians(30.f) && angleZ - step > glm::radians(-30.f))
-			cannon_constraint->setMotorTargetVelocity(speed);
+		{
+		}
 		else
-			cannon_constraint->setMotorTargetVelocity(0);
+			cannon_constraint->setMotorTargetVelocity(0.f);
 	}
 
 	void Tank::fire(int count, float force)

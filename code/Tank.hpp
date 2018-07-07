@@ -66,6 +66,8 @@ namespace bullet_3da
 
 		void move_cannon(float speed);
 
+		void check_cannon_rotation(float speed);
+
 		void fire(int count, float force);
 
 	};

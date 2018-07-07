@@ -53,7 +53,6 @@ namespace bullet_3da
 		Event event;
 
 		InputData input_data;
-		InputData prev_data;
 
 		Vector2i mouse_pos;
 		Vector2i prev_mouse_pos;
@@ -87,8 +86,6 @@ namespace bullet_3da
 			(*input_data)[button_pan] = false;
 			(*input_data)[button_rot] = false;
 
-			prev_data = make_shared < map < input_type, Variant > >(*input_data);
-
 			mouse_pos = Vector2i();
 			prev_mouse_pos = Vector2i();
 
@@ -101,9 +98,15 @@ namespace bullet_3da
 			bool mouse_moved = false;
 			bool did_resize = false;
 
-			(*input_data)[button_fire] = false;
-
 			(*input_data)[button_forward] = false;
+			(*input_data)[button_back] = false;
+			(*input_data)[button_right] = false;
+			(*input_data)[button_left] = false;
+			(*input_data)[button_right2] = false;
+			(*input_data)[button_left2] = false;
+			(*input_data)[button_up] = false;
+			(*input_data)[button_down] = false;
+			(*input_data)[button_fire] = false;
 
 			while (window->pollEvent(event))
 			{
@@ -135,14 +138,6 @@ namespace bullet_3da
 					{
 						if (event.key.code == sf::Keyboard::W)
 						{
-							/*if (!(*input_data)[button_forward])
-							{
-								(*input_data)[button_forward] = true;
-							}
-							else
-							{
-								(*input_data)[button_forward] = false;
-							}*/
 							(*input_data)[button_forward] = true;
 						}
 						else if (event.key.code == sf::Keyboard::S)
@@ -189,35 +184,35 @@ namespace bullet_3da
 						} 
 						else if (event.key.code == sf::Keyboard::S)
 						{
-							(*input_data)[button_back] = false;
+							(*input_data)[button_back] = true;
 						}
 						else if (event.key.code == sf::Keyboard::A)
 						{
-							(*input_data)[button_left] = false;
+							(*input_data)[button_left] = true;
 						}
 						else if (event.key.code == sf::Keyboard::D)
 						{
-							(*input_data)[button_right] = false;
+							(*input_data)[button_right] = true;
 						}
 						else if (event.key.code == sf::Keyboard::Q)
 						{
-							(*input_data)[button_left2] = false;
+							(*input_data)[button_left2] = true;
 						}
 						else if (event.key.code == sf::Keyboard::E)
 						{
-							(*input_data)[button_right2] = false;
+							(*input_data)[button_right2] = true;
 						}
 						else if (event.key.code == sf::Keyboard::R)
 						{
-							(*input_data)[button_up] = false;
+							(*input_data)[button_up] = true;
 						}
 						else if (event.key.code == sf::Keyboard::F)
 						{
-							(*input_data)[button_down] = false;
+							(*input_data)[button_down] = true;
 						}
 						else if (event.key.code == sf::Keyboard::Space)
 						{
-							(*input_data)[button_fire] = false;
+							(*input_data)[button_fire] = true;
 						}
 
 						break;
@@ -250,19 +245,6 @@ namespace bullet_3da
 					}
 				}
 			}
-
-		/*	if (event.key.code == sf::Keyboard::W)
-			{
-				if (!(*input_data)[button_forward])
-				{
-					(*input_data)[button_forward] = true;
-				} else
-				{
-					(*input_data)[button_forward] = false;
-				}
-			}*/
-
-			(*prev_data)[button_forward] = (*input_data)[button_forward];
 
 			if (!mouse_moved)
 			{
