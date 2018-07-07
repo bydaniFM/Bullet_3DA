@@ -7,7 +7,9 @@ Date:	27/06/2018
 
 #include <Platform.hpp>
 #include <Ground.hpp>
+#include <Door.hpp>
 #include <Tank.hpp>
+#include <Wall.hpp>
 
 namespace bullet_3da
 {

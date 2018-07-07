@@ -17,8 +17,9 @@ namespace bullet_3da
 		shared_ptr< Light       > light(new Light);
 
 		light->translate(glt::Vector3(5.f, 5.f, 5.f));
-		camera->translate(glt::Vector3(-100.f, 70.f, 00.f));
+		//light->set_intensity(0.5f);
 
+		camera->translate(glt::Vector3(-100.f, 70.f, 00.f));
 		camera->rotate_around_y(glm::radians(-80.f));
 		camera->rotate_around_x(glm::radians(-10.f));
 
@@ -41,6 +42,14 @@ namespace bullet_3da
 		Platform moving_platform = Platform();
 		moving_platform.translate(0, 20, -75);
 		add("moving_platform", make_shared<Platform>(moving_platform));
+
+		Wall wall;
+		wall.translate(25, 55, -150);
+		add("wall", make_shared<Wall>(wall));
+
+		Door door;
+		door.translate(-50, 55, -150);
+		add("door", make_shared<Door>(door));
 
 		tank.reset(new Tank(this, glt::Vector3(20, 35, -20)));
 		//add("tank", make_shared<Tank>(tank));
