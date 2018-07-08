@@ -50,7 +50,7 @@ namespace bullet_3da
 
 		shared_ptr < Shape > wheel_shape(new Cylinder_Shape(3.75f, 1.3f, 3.75f));
 		btQuaternion wheel_rotation = btQuaternion(0.707f, 0.707f, 0.f, 0.f);
-		float wheel_friction = 1.5f;
+		float wheel_friction = 2.5f;
 
 		// wheel r1
 		shared_ptr<Rigid_Body> wheel_rb_r1(new Dynamic_Rigid_Body(wheel_shape, 10.f));
@@ -128,8 +128,11 @@ namespace bullet_3da
 		scene->get_physics_world()->addConstraints(wheel_l2_constraint);
 
 
-		/*cannon_rb->get()->setIgnoreCollisionCheck(turret_rb->get(), true);
-		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);*/
+		cannon_rb->get()->setIgnoreCollisionCheck(turret_rb->get(), true);
+		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);
+
+		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);
+		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);
 
 		wheel_rb_r1->get()->setIgnoreCollisionCheck(body_rb->get(), true);
 		wheel_rb_r2->get()->setIgnoreCollisionCheck(body_rb->get(), true);
@@ -200,10 +203,24 @@ namespace bullet_3da
 		float angleX, angleY, angleZ;
 		cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(angleX, angleY, angleZ);
 
+		float top = 30.f;
+		float bot = -30.f;
+
+		if (glm::abs(angleZ) > glm::half_pi<float>())
+		{
+			if(angleZ > 0)
+				angleZ -= glm::pi<float>();
+			else
+				angleZ += glm::pi<float>();
+
+			/*top = 180 - top;
+			bot = 180 - bot;*/
+		}
+
 		//float step = cannon_constraint->getRigidBodyA().getAngularVelocity().norm();
 		float step = glm::radians(speed);
 
-		if (angleZ - step < glm::radians(30.f) && angleZ - step > glm::radians(-30.f))
+		if (angleZ - step < glm::radians(top) && angleZ - step > glm::radians(bot))
 		{
 		}
 		else

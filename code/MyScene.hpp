@@ -6,6 +6,7 @@ Date:	27/06/2018
 #include <Scene.hpp>
 
 #include <Platform.hpp>
+#include <Column.hpp>
 #include <Ground.hpp>
 #include <Door.hpp>
 #include <Tank.hpp>

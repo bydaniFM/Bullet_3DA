@@ -38,7 +38,7 @@ namespace bullet_3da
 			rb->get()->setLinearFactor(btVector3(1, 0, 0));
 			rb->get()->setAngularFactor(btVector3(0, 0, 0));
 
-			rb->get()->setFriction(2.f);
+			//rb->get()->setFriction(2.f);
 
 			Entity::physics_model = rb;
 			Entity::graphics_model.reset(new Model_Obj("../../assets/Platform.obj"));

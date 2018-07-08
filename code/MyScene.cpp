@@ -55,6 +55,22 @@ namespace bullet_3da
 		door->translate(-50, 55, -150);
 		add("door", door);
 
+		Column column1;
+		column1.translate(-50, 50, -300);
+		add("column1", make_shared<Column>(column1));
+
+		Column column2;
+		column2.translate(-15, 50, -300);
+		add("column2", make_shared<Column>(column2));
+
+		Column column3;
+		column3.translate(15, 50, -300);
+		add("column3", make_shared<Column>(column3));
+
+		Column column4;
+		column4.translate(50, 50, -300);
+		add("column4", make_shared<Column>(column4));
+
 		tank.reset(new Tank(this, glt::Vector3(20, 35, -20)));
 		//add("tank", make_shared<Tank>(tank));
 
