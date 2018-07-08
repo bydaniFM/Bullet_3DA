@@ -20,8 +20,8 @@ namespace bullet_3da
 		//light->set_intensity(0.5f);
 
 		camera->translate(glt::Vector3(-100.f, 70.f, 00.f));
-		camera->rotate_around_y(glm::radians(-80.f));
-		camera->rotate_around_x(glm::radians(-10.f));
+		camera->rotate_around_y(glm::radians(-100.f));
+		camera->rotate_around_x(glm::radians(-0.f));
 
 		graphics_scene->add("camera", camera);
 		graphics_scene->add("light", light);
@@ -32,15 +32,15 @@ namespace bullet_3da
 		add("ground1", make_shared<Ground>(ground1));
 
 		Ground ground2 = Ground();
-		ground2.translate(0, 0, -150);
+		ground2.translate(0, 0, 150);
 		add("ground2", make_shared<Ground>(ground2));
 
 		Ground ground3 = Ground();
-		ground3.translate(0, 0, -300);
+		ground3.translate(0, 0, 300);
 		add("ground3", make_shared<Ground>(ground3));
 
 		Platform moving_platform = Platform();
-		moving_platform.translate(0, 20, -75);
+		moving_platform.translate(0, 20, 75);
 		add("moving_platform", make_shared<Platform>(moving_platform));
 
 		Key key;
@@ -48,30 +48,30 @@ namespace bullet_3da
 		add("key", make_shared<Key>(key));
 
 		Wall wall;
-		wall.translate(25, 55, -150);
+		wall.translate(25, 55, 150);
 		add("wall", make_shared<Wall>(wall));
 
 		door.reset(new Door());
-		door->translate(-50, 55, -150);
+		door->translate(-50, 55, 150);
 		add("door", door);
 
 		Column column1;
-		column1.translate(-50, 50, -300);
+		column1.translate(-50, 50, 300);
 		add("column1", make_shared<Column>(column1));
 
 		Column column2;
-		column2.translate(-15, 50, -300);
+		column2.translate(-15, 50, 300);
 		add("column2", make_shared<Column>(column2));
 
 		Column column3;
-		column3.translate(15, 50, -300);
+		column3.translate(15, 50, 300);
 		add("column3", make_shared<Column>(column3));
 
 		Column column4;
-		column4.translate(50, 50, -300);
+		column4.translate(50, 50, 300);
 		add("column4", make_shared<Column>(column4));
 
-		tank.reset(new Tank(this, glt::Vector3(20, 35, -20)));
+		tank.reset(new Tank(this, glt::Vector3(20, 35, 20)));
 		//add("tank", make_shared<Tank>(tank));
 
 		projectile_count = 0;
