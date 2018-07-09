@@ -74,8 +74,6 @@ namespace bullet_3da
 		tank.reset(new Tank(this, glt::Vector3(20, 35, 20)));
 		//add("tank", make_shared<Tank>(tank));
 
-		projectile_count = 0;
-
 		door_opened = false;
 	}
 
@@ -231,8 +229,7 @@ namespace bullet_3da
 			if (std::clock() - time_fire > 1.f * CLOCKS_PER_SEC)
 			{
 				cout << "Fire!" << endl;
-				tank->fire(projectile_count, 200.f);
-				projectile_count++;
+				tank->fire(200.f);
 
 				time_fire = std::clock();
 			}

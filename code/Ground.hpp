@@ -20,10 +20,12 @@ using namespace std;
 
 namespace bullet_3da
 {
+	/// Represents big platform in which other entities can stand.
 	class Ground: public Entity
 	{
 	public:
 
+		/// Creates a new ground, consisting of a Static_Rigid_Body.
 		Ground(): Entity()
 		{
 			shared_ptr < Shape > shape(new Box_Shape(75.0f, 25.0f, 50.0f));

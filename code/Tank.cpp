@@ -89,6 +89,7 @@ namespace bullet_3da
 		shared_ptr<Entity> wheel_l2(new Entity(/*scene, */"../../assets/Wheel.obj", wheel_rb_l2));
 
 		
+		// Objects are added to the scene
 
 		scene->add("body", body);
 		scene->add("turret", turret);
@@ -97,6 +98,9 @@ namespace bullet_3da
 		scene->add("wheel_r2", wheel_r2);
 		scene->add("wheel_l1", wheel_l1);
 		scene->add("wheel_l2", wheel_l2);
+
+
+		// Constraints creation
 
 		//add_constraints(scene, turret_constraint, *turret_rb->get(), *body_rb->get(), btVector3(0.f, 0.f, 0.f), btVector3(0.f, 0.0f, 0.f), btVector3(0.f, -1.f, 0.f), btVector3(0.f, 0.f, 0.f), true);
 
@@ -127,6 +131,8 @@ namespace bullet_3da
 		wheel_l2_constraint->enableAngularMotor(true, 0.f, 10.f);
 		scene->get_physics_world()->addConstraints(wheel_l2_constraint);
 
+
+		// Ignore collisions between different parts of the tank
 
 		cannon_rb->get()->setIgnoreCollisionCheck(turret_rb->get(), true);
 		cannon_rb->get()->setIgnoreCollisionCheck(body_rb->get(), true);
@@ -185,16 +191,7 @@ namespace bullet_3da
 
 	void Tank::move_cannon(float speed)
 	{
-		////Check angle
-		//float angleX, angleY, angleZ;
-		//cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(angleX, angleY, angleZ);
-
-		//float step = glm::radians(speed);
-
-		//if (angleZ - step < glm::radians(30.f) && angleZ - step > glm::radians(-30.f))
-			cannon_constraint->setMotorTargetVelocity(speed);
-		/*else
-			cannon_constraint->setMotorTargetVelocity(0);*/
+		cannon_constraint->setMotorTargetVelocity(speed);
 	}
 
 	void Tank::check_cannon_rotation(float speed)
@@ -212,9 +209,6 @@ namespace bullet_3da
 				angleZ -= glm::pi<float>();
 			else
 				angleZ += glm::pi<float>();
-
-			/*top = 180 - top;
-			bot = 180 - bot;*/
 		}
 
 		//float step = cannon_constraint->getRigidBodyA().getAngularVelocity().norm();
@@ -227,8 +221,9 @@ namespace bullet_3da
 			cannon_constraint->setMotorTargetVelocity(0.f);
 	}
 
-	void Tank::fire(int count, float force)
+	void Tank::fire(float force)
 	{
+		// The position and direction of the direction of the cannon is calculated.
 		float aX, aY, aZ;
 		cannon_constraint->getRigidBodyA().getWorldTransform().getRotation().getEulerZYX(aZ, aY, aX);
 
@@ -240,6 +235,8 @@ namespace bullet_3da
 			-glm::sin(aX),
 			glm::cos(aY) * glm::cos(aZ)
 		);
+
+		// We search for an inactive bullet and launch it using the calculated vectors.
 
 		for (size_t i = 0; i < bullets.size(); ++i)
 		{

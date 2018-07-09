@@ -20,13 +20,15 @@ using namespace sf;
 
 namespace bullet_3da
 {
-
+	/// Encapsulates a SFML Window.
 	class View
 	{
+		/// Window of the application.
 		shared_ptr<Window> window;
 
 	public:
 
+		/// Creates a new view.
 		View();
 
 		void reset_viewport(Scene & scene);

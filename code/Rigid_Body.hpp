@@ -18,11 +18,16 @@ using namespace std;
 
 namespace bullet_3da
 {
+	/// Encapsulates a Bullet's rigid body and it's components.
+	/// Base class of a static or a dynamic object.
 	class Rigid_Body
 	{
 	protected:
+		/// Bullet's btRigidBody.
 		std::shared_ptr< btRigidBody 		  > body;
+		/// Bullet's btDefaultMotionState.
 		std::shared_ptr< btDefaultMotionState > state;
+		/// Shape of the Rigid_Body.
 		std::shared_ptr< Shape   			  > shape;
 
 	public:
@@ -30,6 +35,8 @@ namespace bullet_3da
 		///DEPRECATED
 		Rigid_Body();
 
+		/// Creates a new Rigid_Body given a Shape.
+		/// @param Rigid_Body's Shape.
 		Rigid_Body(std::shared_ptr< Shape > & shape) : shape(shape)
 		{
 			btTransform transform;
@@ -51,11 +58,15 @@ namespace bullet_3da
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/// Rigid_Body with mass 0, so it can't be moved in the physics simulaiton.
 	class Static_Rigid_Body : public Rigid_Body
 	{
 
 	public:
 
+		/// Creates a new Static_Rigid_Body.
+		/// Creates the btRigidBody with mass 0.
+		/// @param Shape of the body.
 		Static_Rigid_Body(std::shared_ptr< Shape > & shape) : Rigid_Body(shape)
 		{
 			btRigidBody::btRigidBodyConstructionInfo info
@@ -70,13 +81,17 @@ namespace bullet_3da
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/// Encapsulates a btRigidBody with mass.
 	class Dynamic_Rigid_Body : public Rigid_Body
 	{
-
+		/// Mass of the body.
 		btScalar mass;
 
 	public:
 
+		/// Creates a btRigidBody.
+		/// @param shape of the body.
+		/// @param mass of the body.
 		Dynamic_Rigid_Body(std::shared_ptr< Shape > & shape, float mass)
 			:
 			Rigid_Body(shape), mass(btScalar(mass))

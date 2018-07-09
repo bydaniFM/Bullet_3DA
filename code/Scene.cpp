@@ -26,10 +26,4 @@ namespace bullet_3da
 	{
 		physics_world.reset();
 	}
-
-	/*void Scene::configure_scene()
-	{
-		graphics_scene.get["light"]->translate(Vector3(10.f, 10.f, 10.f));
-		graphics_scene.get["camera"]->translate(Vector3(0.f, 0.f, 5.f));
-	}*/
 }

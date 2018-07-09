@@ -14,17 +14,19 @@ using namespace glm;
 
 namespace bullet_3da
 {
+	/// Scene pre-declaration
 	class Scene;
 
+	/// Represents a game object inside the scene.
 	class Entity
 	{
-	/*protected:
-
-		Scene & scene;*/
 
 	protected:
 
+		/// Visual component of the Entity.
 		shared_ptr<glt::Model> graphics_model;
+
+		/// Physics component of the Entity.
 		shared_ptr < Rigid_Body > physics_model;
 
 	public:
@@ -33,6 +35,9 @@ namespace bullet_3da
 		{
 		}
 
+		/// Creates a new base Entity given a route of the model and a Rigid_Body.
+		/// @param route to the 3D model in OBJ.
+		/// @param rigid body to be used for the physics symulation of this entity.
 		Entity(const string & model_path, shared_ptr< Rigid_Body > & physics_model)
 			:
 			physics_model(physics_model)
@@ -44,7 +49,7 @@ namespace bullet_3da
 		{
 		}
 
-
+		/// Gets the transformation of the physics_model and applies it to the graphics_model.
 		virtual void update()
 		{
 			btTransform physics_transform;
@@ -55,6 +60,7 @@ namespace bullet_3da
 			//graphics_model->scale(graphics_scale.x, graphics_scale.y, graphics_scale.z);
 		}
 
+		/// Translates the Entity to a new opsition given its 3D coordinates.
 		void translate(float x, float y, float z)
 		{
 			btTransform transform;
@@ -73,21 +79,5 @@ namespace bullet_3da
 		{
 			return graphics_model;
 		}
-
-	/*protected:
-
-		void add_constraints
-		(
-			Scene						      * scene,
-			shared_ptr< btHingeConstraint >   & constraint,
-			btRigidBody						  & body1,
-			btRigidBody						  & body2,
-			btVector3							pos_body1,
-			btVector3							pos_body2,
-			btVector3							rot_body1,
-			btVector3							rot_body2,
-			bool								ref_frame_A
-		);*/
-
 	};
 }

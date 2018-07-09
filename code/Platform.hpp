@@ -21,12 +21,14 @@ using namespace std;
 
 namespace bullet_3da
 {
+	/// Represents a moving platform in which the tank or other objects can stand.
 	class Platform : public Entity
 	{
-		//std::clock_t time;
 
 	public:
 
+		/// Creates a new Platform.
+		/// It consists in a Dynamic_Rigid_Body constrained to move in only one axis.
 		Platform() : Entity()
 		{
 			shared_ptr < Shape > shape(new Box_Shape(30.0f, 5.0f, 25.0f));
@@ -42,10 +44,9 @@ namespace bullet_3da
 
 			Entity::physics_model = rb;
 			Entity::graphics_model.reset(new Model_Obj("../../assets/Platform.obj"));
-
-			//time = std::clock();
 		}
 
+		/// Moves the platform constantly using a sine funciton.
 		void update() override
 		{
 			//time = std::clock();

@@ -20,10 +20,12 @@ using namespace std;
 
 namespace bullet_3da
 {
+	/// Represents the wall between the Tank and the Columns.
 	class Wall : public Entity
 	{
 	public:
-
+		/// Creates a Wall.
+		/// The Wall is a simple Static_Rigid_Body.
 		Wall() : Entity()
 		{
 			shared_ptr < Shape > shape(new Box_Shape(50.0f, 30.0f, 10.0f));

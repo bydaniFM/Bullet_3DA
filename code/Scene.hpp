@@ -27,21 +27,29 @@ using namespace glt;
 
 namespace bullet_3da
 {
+	/// Represents a base scene with graphics and physics simulaiton.
 	class Scene
 	{
+		/// Entities, or objects composing the scene.
 		map<string, shared_ptr<Entity>> entities;
 
 	protected:
 
-		shared_ptr<Render_Node> graphics_scene;	//glt::Scene graphics_scene;
+		/// Scene's rendering root.
+		shared_ptr<Render_Node> graphics_scene;
+		/// Physics world used for the simulaiton.
 		shared_ptr<Physics_World> physics_world;
 
 	public:
+
+		///Creates a base scene
 		Scene();
 		~Scene();
 
-		//void configure_scene();
-
+		/// update is called in every frame.
+		/// Performs the physics simulation step and updates the state of every entity.
+		/// update needs to be called from children objects.
+		/// @param time since the last frame.
 		virtual void update(float deltaTime)
 		{
 			physics_world->step(deltaTime);
@@ -52,6 +60,7 @@ namespace bullet_3da
 			}
 		}
 
+		/// Renders all entities
 		void render()
 		{
 			graphics_scene->render();
@@ -66,6 +75,9 @@ namespace bullet_3da
 			return physics_world;
 		}
 
+		/// Adds an entity to the scene, by adding its rigid body to the physics_world and its model to the graphics_scene.
+		/// @param Name of the entity. Must be unique.
+		/// @param Entity to add.
 		void add(string name, shared_ptr<Entity> entity)
 		{
 			entities[name] = entity;
@@ -73,11 +85,13 @@ namespace bullet_3da
 			graphics_scene->add(name, entity->getModel());
 		}
 
+		/// Returns an entity from its name.
 		shared_ptr<Entity> get_entity(string name)
 		{
 			return entities[name];
 		}
 
+		/// To implement by children objecs. See MyScene.
 		virtual void processInput(Input::InputData input_data)
 		{
 		}

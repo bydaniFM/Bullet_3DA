@@ -14,20 +14,24 @@ Date:	04/05/2018
 
 namespace bullet_3da
 {
+	/// Represents the projectiles that can be fired from the tank's cannon.
 	class Sphere : public Entity
 	{
+		/// An Sphere is active when it's being shot.
 		bool active;
 
+		/// Stores the time of when the Sphere was launched.
 		std::clock_t time;
 
-		//shared_ptr < Rigid_Body > this->getRigidBody();
-
+		/// Stores the rigid body's flags, so the Sphere can be set to kinematic and reset to non-kinematic.
 		int flags;
 
 
 	public:
 
-		Sphere(/*Scene * scene, btVector3 position, btVector3 force*/) : Entity()
+		/// Creates a new Sphere.
+		/// An Sphere is a Dynamic_Rigid_Body that is set to kinematic when is not active.
+		Sphere() : Entity()
 		{
 			shared_ptr < Shape > shape(new Sphere_Shape(1.5f));
 			shared_ptr < Rigid_Body > rb(new Dynamic_Rigid_Body(shape, 2.f));
@@ -44,6 +48,8 @@ namespace bullet_3da
 
 		}
 
+		/// When active, checks for the amount of time it's been active, and deactivates it when the time is due.
+		/// For the deactivation, the velocity is cancelled and then the rigid body is set to kinematic.
 		void update() override
 		{
 			if (active)
@@ -65,6 +71,9 @@ namespace bullet_3da
 			Entity::update();
 		}
 
+		/// Activates and launches the Sphere.
+		/// @param Position in which the Spohere has to appear before being launched.
+		/// @param Force vector for the impulse. Must be facing the direction of the cannon.
 		void launch(btVector3 position, btVector3 force)
 		{
 			active = true;
