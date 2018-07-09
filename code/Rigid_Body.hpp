@@ -36,7 +36,7 @@ namespace bullet_3da
 		Rigid_Body();
 
 		/// Creates a new Rigid_Body given a Shape.
-		/// @param Rigid_Body's Shape.
+		/// @param shape Rigid_Body's Shape.
 		Rigid_Body(std::shared_ptr< Shape > & shape) : shape(shape)
 		{
 			btTransform transform;
@@ -66,7 +66,7 @@ namespace bullet_3da
 
 		/// Creates a new Static_Rigid_Body.
 		/// Creates the btRigidBody with mass 0.
-		/// @param Shape of the body.
+		/// @param shape Shape of the body.
 		Static_Rigid_Body(std::shared_ptr< Shape > & shape) : Rigid_Body(shape)
 		{
 			btRigidBody::btRigidBodyConstructionInfo info

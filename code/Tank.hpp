@@ -54,8 +54,8 @@ namespace bullet_3da
 	public:
 
 		/// Creates a new Tank.
-		/// @param The Scene the tank will be in.
-		/// @param Initial position of the tank.
+		/// @param scene The Scene the tank will be in.
+		/// @param position Initial position of the tank.
 		Tank(Scene * scene, glt::Vector3 position);
 
 		shared_ptr < Rigid_Body > getRigidBody() override
@@ -76,11 +76,11 @@ namespace bullet_3da
 		void turn_left();
 
 		/// Rotates the turret using its constraint motor.
-		/// @param Speed of the rotation. Use negative for a left-hand rotation.
+		/// @param speed of the rotation. Use negative for a left-hand rotation.
 		void rotate_turret(float speed);
 
 		/// Rises ro lowers the cannon.
-		/// @param Positive to rise, negative to lower the cannon.
+		/// @param speed Positive to rise, negative to lower the cannon.
 		void move_cannon(float speed);
 
 		/// Checks if the cannon is still between it's constraints and stops its movement if not.
@@ -88,7 +88,7 @@ namespace bullet_3da
 
 		/// Activates an launches an available Sphere from the pool.
 		/// The cannon position and orientation is calculated and used to launch the selected Sphere.
-		/// @param Force to be applied to the Sphere's force vector.
+		/// @param force to be applied to the Sphere's force vector.
 		void fire(float force);
 
 	};

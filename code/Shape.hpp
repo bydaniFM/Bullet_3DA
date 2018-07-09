@@ -49,7 +49,7 @@ namespace bullet_3da
 	{
 	public:
 		/// Creates a btSphereShape.
-		/// @param Radius of the sphere.
+		/// @param radius of the sphere.
 		Sphere_Shape(float radius)
 			:
 			Shape(std::shared_ptr< btCollisionShape >(new btSphereShape(btScalar(radius))))
@@ -63,9 +63,9 @@ namespace bullet_3da
 	{
 	public:
 		/// Creates a btBoxShape.
-		/// @param Box's distance from center to X side. Must be the half of the actual width.
-		/// @param Box's distance from center to Y side. Must be the half of the actual height.
-		/// @param Box's distance from center to Z side. Must be the half of the actual depth.
+		/// @param width Box's distance from center to X side. Must be the half of the actual width.
+		/// @param height Box's distance from center to Y side. Must be the half of the actual height.
+		/// @param depth Box's distance from center to Z side. Must be the half of the actual depth.
 		Box_Shape(float width, float height, float depth)
 			:
 			Shape(std::shared_ptr< btCollisionShape >(new btBoxShape(btVector3(width, height, depth))))
@@ -79,9 +79,9 @@ namespace bullet_3da
 	{
 	public:
 		/// Creates a btCylinderShape. The cylinder is created standing on one of its bases.
-		/// @param Cylinders's first radius.
-		/// @param distance from center to Y side. Must be the half of the actual height.
-		/// @param Cylinders's first radius.
+		/// @param width Cylinders's first radius.
+		/// @param height distance from center to Y side. Must be the half of the actual height.
+		/// @param depth Cylinders's first radius.
 		Cylinder_Shape(float width, float height, float depth)
 			:
 			Shape(std::shared_ptr< btCollisionShape >(new btCylinderShape(btVector3(width, height, depth))))

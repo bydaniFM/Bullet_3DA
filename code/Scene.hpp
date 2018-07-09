@@ -49,7 +49,7 @@ namespace bullet_3da
 		/// update is called in every frame.
 		/// Performs the physics simulation step and updates the state of every entity.
 		/// update needs to be called from children objects.
-		/// @param time since the last frame.
+		/// @param deltaTime time since the last frame.
 		virtual void update(float deltaTime)
 		{
 			physics_world->step(deltaTime);
@@ -76,8 +76,8 @@ namespace bullet_3da
 		}
 
 		/// Adds an entity to the scene, by adding its rigid body to the physics_world and its model to the graphics_scene.
-		/// @param Name of the entity. Must be unique.
-		/// @param Entity to add.
+		/// @param name of the entity. Must be unique.
+		/// @param entity to add.
 		void add(string name, shared_ptr<Entity> entity)
 		{
 			entities[name] = entity;

@@ -36,8 +36,8 @@ namespace bullet_3da
 		}
 
 		/// Creates a new base Entity given a route of the model and a Rigid_Body.
-		/// @param route to the 3D model in OBJ.
-		/// @param rigid body to be used for the physics symulation of this entity.
+		/// @param model_path route to the 3D model in OBJ.
+		/// @param physics_model rigid body to be used for the physics symulation of this entity.
 		Entity(const string & model_path, shared_ptr< Rigid_Body > & physics_model)
 			:
 			physics_model(physics_model)

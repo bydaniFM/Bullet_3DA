@@ -43,11 +43,11 @@ namespace bullet_3da
 
 		/// update is called on every frame.
 		/// Now it's used to check for collissions between objects
-		/// @param Time since the previous frame.
+		/// @param deltaTime Time since the previous frame.
 		void update(float deltaTime) override;
 
 		/// Performs the behaviour of all objects in the scene.
-		/// @param contains the input data from this frame.
+		/// @param input_data contains the input data from this frame.
 		void processInput(Input::InputData input_data) override;
 	};
 }

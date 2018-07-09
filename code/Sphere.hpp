@@ -72,8 +72,8 @@ namespace bullet_3da
 		}
 
 		/// Activates and launches the Sphere.
-		/// @param Position in which the Spohere has to appear before being launched.
-		/// @param Force vector for the impulse. Must be facing the direction of the cannon.
+		/// @param position in which the Spohere has to appear before being launched.
+		/// @param force vector for the impulse. Must be facing the direction of the cannon.
 		void launch(btVector3 position, btVector3 force)
 		{
 			active = true;

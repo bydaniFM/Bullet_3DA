@@ -57,7 +57,7 @@ namespace bullet_3da
 		}
 
 		/// Adds a new body to the simulation world.
-		/// @param the body to insert into the world.
+		/// @param body the body to insert into the world.
 		void add(shared_ptr< Rigid_Body > & body)
 		{
 			bodies.push_back(body);
@@ -78,7 +78,7 @@ namespace bullet_3da
 		}
 
 		/// Adds a hinge constraint into the world.
-		/// @param The btHingeConstraint to add into the world.
+		/// @param hinge The btHingeConstraint to add into the world.
 		void addConstraints(btHingeConstraint * hinge)
 		{
 			constraints.push_back(shared_ptr<btHingeConstraint>(hinge));
